@@ -1,4 +1,4 @@
-# Projeto Programacao Web
+# Projeto Programação Web
 > Caio Dutra Moretti - BSI - IFF - 2023.2
 
 O projeto armazenado neste repositório será desenvolvido na disciplina Programação para Web.
