@@ -5,7 +5,7 @@
 <p align="left">
   <img src="https://user-images.githubusercontent.com/102165296/280130142-e467dc59-7f36-4c4f-9a4a-8d4d90e205f2.jpg" width = "125px" />
 
-  <img align="right" src="https://user-images.githubusercontent.com/102165296/277831133-7c45fcf1-1667-40bb-8607-51462c9f8169.png" width = "125px" />
+
 </p>
 
 
