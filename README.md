@@ -2,16 +2,19 @@
 > Caio Dutra Moretti - BSI - IFF - 2023.2
 
 
+<p align="left">
+  <img src="https://user-images.githubusercontent.com/102165296/280130142-e467dc59-7f36-4c4f-9a4a-8d4d90e205f2.jpg" width = "125px" />
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/102165296/277831133-7c45fcf1-1667-40bb-8607-51462c9f8169.png" width = "125px" />
+  <img align="right" src="https://user-images.githubusercontent.com/102165296/277831133-7c45fcf1-1667-40bb-8607-51462c9f8169.png" width = "125px" />
 </p>
 
 
-> ![Static Badge](https://img.shields.io/badge/Status-Em%20desenvolvimento-yellow)
+> ![Static Badge](https://img.shields.io/badge/Status-Em%20desenvolvimento-yellow) ![Static Badge](https://img.shields.io/badge/Framework-Spring-light_green)
 
 
-O projeto armazenado neste repositório será desenvolvido na disciplina Programação para Web.
+
+A proposta desse projeto é criar uma aplicação web para gerênciar a entrada e saída de encomendas em um condomínio.
+Este é um projeto elaborado para a disciplina de Desenvolvimento Web.
 
 ## Instalação / Como começar
 
