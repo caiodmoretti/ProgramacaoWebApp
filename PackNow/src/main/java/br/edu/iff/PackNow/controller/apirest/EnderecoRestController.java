@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.iff.PackNow.model.Endereco;
+import br.edu.iff.PackNow.service.EnderecoService;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
@@ -30,23 +32,23 @@ public class EnderecoRestController {
 	@PutMapping("/{id}")
 	@ResponseBody
 	@Operation(summary = "Atualizar um endereço")
-	public String atualizarEndereco(@PathVariable("id") int id, String numero, String bloco) throws Exception{
+	public String atualizarEndereco(@PathVariable("id") Long id, String numero, String bloco) throws Exception{
 		Endereco eBusca = EnderecoServ.getEnderecoById(id);
 		if(eBusca == null) {
 			return "Endereco não encontrado";
 		} else {
-			return EnderecoServ.atualizarEndereco(eBusca.getNumeroEBloco());
+			return EnderecoServ.atualizarEndereco(eBusca);
 		}
 	}
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@Operation(summary = "Deletar um endereço")
-	public String deletarEndereco(@PathVariable("id") int id) throws Exception {
-		Endereco eBusca = EnderecoServ.getFuncionarioById(id);
+	public String deletarEndereco(@PathVariable("id") Long id) throws Exception {
+		Endereco eBusca = EnderecoServ.getEnderecoById(id);
 		if(eBusca==null) {			
 			return "Endereço não encontrado";
 		}else {
-			return EnderecoServ.deletarFuncionarioCPF(eBusca.getNumeroEBloco());
+			return EnderecoServ.deletarEntedereco(eBusca);
 		}
 	}
 	

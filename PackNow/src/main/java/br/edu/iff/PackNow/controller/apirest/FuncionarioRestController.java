@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.iff.PackNow.model.Funcionario;
+import br.edu.iff.PackNow.service.FuncionarioService;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
@@ -23,8 +25,8 @@ public class FuncionarioRestController {
 	@PostMapping("")
 	@ResponseBody
 	@Operation(summary = "Adicionar um funcionário")
-	public String addFuncionario(String nome, String email, String cpf, String senha, String telefone, String funcao) throws Exception{
-		return FuncionarioServ.addFuncionario(new Funcionario(nome, email, cpf, senha, telefone, funcao));
+	public String addFuncionario(String nome, String telefone, String cpf,  String funcao) throws Exception{
+		return FuncionarioServ.addFuncionario(new Funcionario(nome,telefone, cpf, funcao));
 	}
 	
 	@PutMapping("/{id}")

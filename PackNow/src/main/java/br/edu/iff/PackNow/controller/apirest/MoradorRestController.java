@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.iff.PackNow.model.Morador;
+import br.edu.iff.PackNow.service.MoradorService;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
@@ -24,15 +26,15 @@ public class MoradorRestController {
 	@ResponseBody
 	@Operation(summary = "Adicionar um morador")
 	public String addMorador(String nome, String email, String cpf, String telefone) throws Exception{
-		return MoradorServ.addMorador(new Morador(nome, email, cpf, telefone));
+		return MoradorServ.addMorador(new Morador(nome, cpf, telefone));
 	}
 	
 	@PutMapping("/{id}")
 	@ResponseBody
 	@Operation(summary = "Atualizar um morador")
-	public String atualizarMorador(@PathVariable("id") int id, String nome, String email, String cpf, String telefone) throws Exception{
+	public String atualizarMorador(@PathVariable("id") Long id, String nome, String email, String cpf, String telefone) throws Exception{
 		Morador mBusca = MoradorServ.getMoradoroById(id);
-		if(fBusca == null) {
+		if(mBusca == null) {
 			return "Morador não encontrado";
 		} else {
 			return MoradorServ.atualizarMorador(mBusca.getCpf());
@@ -41,12 +43,12 @@ public class MoradorRestController {
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@Operation(summary = "Deletar um morador")
-	public String deletarMoradorCPF(@PathVariable("id") int id) throws Exception {
+	public String deletarMoradorCPF(@PathVariable("id") Long id) throws Exception {
 		Morador mBusca = MoradorServ.getMoradorById(id);
-		if(fBusca==null) {			
+		if(mBusca==null) {			
 			return "Morador não encontrado";
 		}else {
-			return MoradorServ.deletarMoradorCPF(fBusca.getCpf());
+			return MoradorServ.deletarMoradorCPF(mBusca.getCpf());
 		}
 	}
 	@GetMapping("")
