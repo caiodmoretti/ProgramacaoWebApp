@@ -6,18 +6,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 @Entity
-public class Encomenda implements EncomendaInterface {
+public class Encomenda  {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@JoinColumn(name="fk_funcionarioEntrada")
 	private Funcionario funcionarioEntrada;
+	@JoinColumn(name="fk_moradorRetirada")
 	private Morador moradorRetirada;
+	@JoinColumn(name="fk_endereco")
 	private Endereco enderecoEntrega;
+	@Temporal(TemporalType.DATE)
 	private LocalDate dataEntrada;
+	@Temporal(TemporalType.DATE)
 	private LocalDate dataSaida;
 	private String nomeEntregador;
 	private String telefoneEntregador;
@@ -29,10 +37,11 @@ public class Encomenda implements EncomendaInterface {
 		this.setNomeEntregador(nomeEntregador);
 		this.setTelefoneEntregador(telefoneEntregador);
 	}
+	public Encomenda() {};
 	/**
 	 * @param the funcionarioEntrada to set
 	 */
-	public final void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(Funcionario funcionario) {
 		if(funcionario == null) {
 			throw new IllegalArgumentException("Funcionário não pode ser nulo.");
 		}
@@ -41,7 +50,7 @@ public class Encomenda implements EncomendaInterface {
 	/**
 	 * @param the enderecoEntrega to set
 	 */
-	public final void setEndereco(Endereco endereco) {
+	public void setEndereco(Endereco endereco) {
 		if(endereco == null) {
 			throw new IllegalArgumentException("Endereço não pode ser nulo.");
 		}
@@ -50,7 +59,7 @@ public class Encomenda implements EncomendaInterface {
 	/**
 	 * @param the nomeEntregador to set
 	 */
-	public final void setNomeEntregador(String nomeEntregador) {
+	public void setNomeEntregador(String nomeEntregador) {
 		if(nomeEntregador.trim().isEmpty() || nomeEntregador == null) {
 			throw new IllegalArgumentException("Nome de entregador inválido.");
 		}
@@ -59,7 +68,7 @@ public class Encomenda implements EncomendaInterface {
 	/**
 	 * @param the telefoneEntregador to set
 	 */
-	public final void setTelefoneEntregador(String telefoneEntregador) {
+	public  void setTelefoneEntregador(String telefoneEntregador) {
 		if(telefoneEntregador.trim().isEmpty() || telefoneEntregador == null) {
 			throw new IllegalArgumentException("Telefone de entregador inválido.");
 		}

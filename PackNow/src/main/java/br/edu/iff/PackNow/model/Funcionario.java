@@ -9,24 +9,28 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Funcionario extends UsuarioAbstract  implements Serializable {
+public class Funcionario extends Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
+
 	private String cargo;
 		
 	public Funcionario(String nome, String telefone, String cpf, String cargo) {
 		super(nome, telefone, cpf);
-		this.setCargo(cargo);
-		
+
+		this.setCargo(cargo);	
 	}
+	public Funcionario(){
+		super();
+	};
 	/**
 	 * @param the cargo to set
 	 */
-	public final void setCargo(String cargo) {
+	public void setCargo(String cargo) {
 		if(cargo.trim().isEmpty() || cargo == null) {
 			throw new IllegalArgumentException("Cargo inválido.");
 		}
@@ -38,4 +42,6 @@ public class Funcionario extends UsuarioAbstract  implements Serializable {
 	public String getCargo() {
 		return cargo;
 	}
+
+	
 }

@@ -11,9 +11,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
 @Entity
-public class Endereco implements EnderecoInterface, Serializable  {
+public class Endereco implements  Serializable  {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -22,7 +24,8 @@ public class Endereco implements EnderecoInterface, Serializable  {
 	
 	private String numero;
 	private String bloco;
-	@ElementCollection
+	@JoinColumn(name="id_morador")
+	@OneToMany
 	private Set<Morador> moradores;
 	
 	public Endereco(String numero, String bloco) {
@@ -30,11 +33,13 @@ public class Endereco implements EnderecoInterface, Serializable  {
 		this.setBloco(bloco);
 		this.moradores = new HashSet<Morador>();
 	};
+	public Endereco() {
+	}
 	
 	/**
 	 * @param the numero to set
 	 */
-	public final void setNumero(String numero) {
+	public  void setNumero(String numero) {
 		if(numero.trim().isEmpty() || numero == null) {
 			throw new IllegalArgumentException("Numero inválido.");
 		}
@@ -43,7 +48,7 @@ public class Endereco implements EnderecoInterface, Serializable  {
 	/**
 	 * @param the bloco to set
 	 */
-	public final void setBloco(String bloco) {
+	public  void setBloco(String bloco) {
 		if(bloco.trim().isEmpty() || bloco == null) {
 			throw new IllegalArgumentException("Numero inválido.");
 		}
