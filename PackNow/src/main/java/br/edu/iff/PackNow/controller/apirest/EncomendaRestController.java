@@ -1,6 +1,5 @@
 package br.edu.iff.PackNow.controller.apirest;
 import br.edu.iff.PackNow.model.Encomenda;
-import br.edu.iff.PackNow.model.EncomendaInterface;
 import br.edu.iff.PackNow.model.Endereco;
 import br.edu.iff.PackNow.model.Funcionario;
 import br.edu.iff.PackNow.service.EncomendaService;
