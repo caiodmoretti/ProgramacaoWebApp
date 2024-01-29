@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,14 +30,14 @@ public class EncomendaRestController {
 	@PostMapping("")
 	@ResponseBody
 	@Operation(summary = "Adicionar uma encomenda")
-	public String addEncomenda(Funcionario funcionario, Endereco enderecoEntrega, LocalDate dataEntrada, String nomeEntregador, String telefoneEntregador) throws Exception{
-		return EncomendaServ.addEncomenda(new Encomenda(funcionario, enderecoEntrega, dataEntrada, nomeEntregador,telefoneEntregador));
+	public String addEncomenda(Funcionario funcionario, Endereco enderecoEntrega, String nomeEntregador, String telefoneEntregador) throws Exception{
+		return EncomendaServ.addEncomenda(new Encomenda(funcionario, enderecoEntrega, nomeEntregador,telefoneEntregador));
 	}
 	
 	@PutMapping("{id}/atualizar")
 	@ResponseBody
 	@Operation(summary = "Atualizar uma encomenda")
-	public String atualizarEncomenda(@PathVariable("id") Long id, Date dataEntrada, String nomeEntregador, String telefoneEntregador, Endereco enderecoEntrega) throws Exception{
+	public String atualizarEncomenda(@PathVariable("id") Long id, String nomeEntregador, String telefoneEntregador, Endereco enderecoEntrega) throws Exception{
 		Encomenda eBusca = EncomendaServ.getEncomendaById(id);
 		if(eBusca == null) {
 			return "Encomenda não encontrado";
@@ -53,8 +54,7 @@ public class EncomendaRestController {
 		if(eBusca==null) {			
 			return "Encomenda não encontrado";
 		}else {
-			return null;
-			//return EncomendaServ.deletarEncomenda(eBusca.getEncomenda());
+			return EncomendaServ.deletarEncomendaPorId(id);
 		}
 	}
 	@GetMapping("/listar")
@@ -74,7 +74,7 @@ public class EncomendaRestController {
 	@PutMapping("/{id}/registrar-saida")
 	@ResponseBody
 	@Operation(summary = "Registrar saida de uma encomenda")
-	public String registrarSaidaEncomenda(@PathVariable("id")Long id,  Date dataSaida, String morador) throws Exception{
+	public String registrarSaidaEncomenda(@PathVariable("id")Long id, String morador) throws Exception{
 		Encomenda eBusca = EncomendaServ.getEncomendaById(id);
 		if(eBusca == null) {
 			return "Encomenda não encontrado";

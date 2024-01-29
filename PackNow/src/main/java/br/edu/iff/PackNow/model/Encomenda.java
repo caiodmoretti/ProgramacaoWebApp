@@ -7,8 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotBlank;
 @Entity
 public class Encomenda  {
 	
@@ -17,20 +19,32 @@ public class Encomenda  {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
+	@ManyToOne
+	@NotBlank(message = "Não pode ser branco ou nulo")
 	@JoinColumn(name="fk_funcionarioEntrada")
 	private Funcionario funcionarioEntrada;
+	
+	@ManyToOne
 	@JoinColumn(name="fk_moradorRetirada")
 	private Morador moradorRetirada;
+	
+	@ManyToOne
 	@JoinColumn(name="fk_endereco")
 	private Endereco enderecoEntrega;
+	
 	@Temporal(TemporalType.DATE)
+	@NotBlank(message = "Não pode ser em branco ou nulo")
 	private LocalDate dataEntrada;
+	
 	@Temporal(TemporalType.DATE)
 	private LocalDate dataSaida;
+	
 	private String nomeEntregador;
+	
 	private String telefoneEntregador;
 	
-	public Encomenda(Funcionario funcionario, Endereco enderecoEntrega, LocalDate dataEntrada, String nomeEntregador, String telefoneEntregador) {
+	public Encomenda(Funcionario funcionario, Endereco enderecoEntrega, String nomeEntregador, String telefoneEntregador) {
 		this.setFuncionario(funcionario);
 		this.setEndereco(enderecoEntrega);
 		this.dataEntrada = LocalDate.now();
@@ -77,14 +91,18 @@ public class Encomenda  {
 	/**
 	 * @param the dataSaida to set
 	 */
-	public void registrarRetirada() {
+	public void registrarRetirada(Morador morador) {
 		this.dataSaida = LocalDate.now();
+		this.moradorRetirada = morador;
 	}
 	/**
 	 * @return the funcionarioEntrada
 	 */
 	public Funcionario getFuncionarioEntrada() {
 		return this.funcionarioEntrada;
+	}
+	public void setMoradorRetirada(Morador moradorRetirada) {
+		this.moradorRetirada = moradorRetirada;
 	}
 	/**
 	 * @return the moradorRetirada
@@ -125,6 +143,15 @@ public class Encomenda  {
 	 */
 	public String getTelefoneEntregador() {
 		return this.telefoneEntregador;
+	}
+	public Long getId() {
+		return this.id;
+	}
+	public void setDataEntrada(LocalDate dataEntrada) {
+		this.dataEntrada = dataEntrada;
+	}
+	public void setDataSaida(LocalDate dataSaida) {
+		this.dataSaida = dataSaida;
 	}
 
 	

@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Endereco implements  Serializable  {
@@ -22,10 +23,13 @@ public class Endereco implements  Serializable  {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "Não pode ser em branco ou nulo")
 	private String numero;
+	
+	@NotBlank(message = "Não pode ser em branco ou nulo")
 	private String bloco;
-	@JoinColumn(name="id_morador")
-	@OneToMany
+
+	@OneToMany(mappedBy = "endereco")
 	private Set<Morador> moradores;
 	
 	public Endereco(String numero, String bloco) {
@@ -83,6 +87,15 @@ public class Endereco implements  Serializable  {
 	 */
 	public Iterator<Morador> getMoradores(){
 		return Collections.unmodifiableSet(this.moradores).iterator();
+	}
+	public String getNumero() {
+		return numero;
+	}
+	public String getBloco() {
+		return bloco;
+	}
+	public Long getId() {
+		return id;
 	}
 
 

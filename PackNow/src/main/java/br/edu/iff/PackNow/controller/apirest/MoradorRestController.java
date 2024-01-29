@@ -25,19 +25,19 @@ public class MoradorRestController {
 	@PostMapping("")
 	@ResponseBody
 	@Operation(summary = "Adicionar um morador")
-	public String addMorador(String nome, String email, String cpf, String telefone) throws Exception{
+	public String addMorador(String nome, String cpf, String telefone) throws Exception{
 		return MoradorServ.addMorador(new Morador(nome, cpf, telefone));
 	}
 	
 	@PutMapping("/{id}")
 	@ResponseBody
 	@Operation(summary = "Atualizar um morador")
-	public String atualizarMorador(@PathVariable("id") Long id, String nome, String email, String cpf, String telefone) throws Exception{
-		Morador mBusca = MoradorServ.getMoradoroById(id);
+	public String atualizarMorador(@PathVariable("id") Long id, String nome, String telefone, String cpf) throws Exception{
+		Morador mBusca = MoradorServ.getMoradorById(id);
 		if(mBusca == null) {
 			return "Morador não encontrado";
 		} else {
-			return MoradorServ.atualizarMorador(mBusca.getCpf());
+			return MoradorServ.atualizarMorador(nome, telefone, cpf);
 		}
 	}
 	@DeleteMapping("/{id}")
