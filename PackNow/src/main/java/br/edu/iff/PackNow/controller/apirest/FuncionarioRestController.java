@@ -37,7 +37,7 @@ public class FuncionarioRestController {
 		if(fBusca == null) {
 			return "Funcionário não encontrado";
 		} else {
-			return FuncionarioServ.atualizarFuncionario( nome, telefone, fBusca.getCpf(), cargo);
+			return FuncionarioServ.atualizarFuncionario(id, nome, telefone, fBusca.getCpf(), cargo);
 		}
 	}
 	@DeleteMapping("/{id}")

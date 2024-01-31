@@ -37,18 +37,18 @@ public class EnderecoRestController {
 		if(eBusca == null) {
 			return "Endereco não encontrado";
 		} else {
-			return EnderecoServ.atualizarEndereco(numero, bloco);
+			return EnderecoServ.atualizarEndereco(id, numero, bloco);
 		}
 	}
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@Operation(summary = "Deletar um endereço")
-	public String deletarEndereco(@PathVariable("id") Long id, String numero, String bloco) throws Exception {
+	public String deletarEndereco(@PathVariable("id") Long id) throws Exception {
 		Endereco eBusca = EnderecoServ.getEnderecoById(id);
 		if(eBusca==null) {			
 			return "Endereço não encontrado";
 		}else {
-			return EnderecoServ.deletarEntedereco(numero, bloco);
+			return EnderecoServ.deletarEntedereco(id);
 		}
 	}
 	

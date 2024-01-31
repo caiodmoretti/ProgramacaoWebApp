@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.iff.PackNow.model.Endereco;
 import br.edu.iff.PackNow.model.Morador;
 import br.edu.iff.PackNow.service.MoradorService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,9 +36,20 @@ public class MoradorRestController {
 	public String atualizarMorador(@PathVariable("id") Long id, String nome, String telefone, String cpf) throws Exception{
 		Morador mBusca = MoradorServ.getMoradorById(id);
 		if(mBusca == null) {
-			return "Morador não encontrado";
+			return "Morador não encontrado.";
 		} else {
-			return MoradorServ.atualizarMorador(nome, telefone, cpf);
+			return MoradorServ.atualizarDadosMorador(id, nome, telefone, cpf);
+		}
+	}
+	@PutMapping("/{id}/adicionar-morador-endereco")
+	@ResponseBody
+	@Operation(summary = "Adicionar morador em um endereço")
+	public String adicionarMoradorNoEndereco(@PathVariable("id") Long id, Long enderecoId) throws Exception{
+		Morador mBusca = MoradorServ.getMoradorById(id);
+		if(mBusca == null) {
+			return "Morador não encontrado.";
+		} else {
+			return MoradorServ.adicionarMoradorNoEndereco(id, enderecoId);
 		}
 	}
 	@DeleteMapping("/{id}")

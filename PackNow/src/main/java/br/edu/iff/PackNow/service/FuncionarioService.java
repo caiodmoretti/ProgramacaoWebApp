@@ -21,7 +21,6 @@ public class FuncionarioService {
 			return "Funcionário registrado no id " + f.getId();
 		}
 	}
-
 	public Funcionario getFuncionarioById(Long id) {
 		return FuncionarioRep.buscarPeloId(id);
 	}
@@ -33,9 +32,9 @@ public class FuncionarioService {
 		Funcionario f = FuncionarioRep.buscarPeloCPF(cpf);
 		if(f!=null) {	
 			FuncionarioRep.delete(f);
-			return "Funcionario deletado no id "+f.getId();
+			return "Funcionario com o id "+f.getId()+ " foi deletado.";
 		}else {
-			return "Funcionario não encontrado";
+			return "Funcionario não encontrado.";
 		}
 	}
 
@@ -43,8 +42,8 @@ public class FuncionarioService {
 		return FuncionarioRep.findAll();
 	}
 
-	public String atualizarFuncionario(String nome, String telefone, String cpf, String cargo) {
-		Funcionario f = FuncionarioRep.buscarPeloCPF(cpf);
+	public String atualizarFuncionario(Long id, String nome, String telefone, String cpf, String cargo) {
+		Funcionario f = FuncionarioRep.buscarPeloId(id);
 		if(f==null) {
 			return "Funcionario não encontrado.";
 		}else {
@@ -57,11 +56,11 @@ public class FuncionarioService {
 			if(cpf!=null) {
 				f.setCpf(cpf);
 			}
-
 			if(cargo!=null) {				
 				f.setCargo(cargo);
 			}
-			return "Atualizado no id "+f.getId();
+			FuncionarioRep.save(f);
+			return "Funcionário com o id "+f.getId()+ " foi atualizado.";
 		}
 	}
 
