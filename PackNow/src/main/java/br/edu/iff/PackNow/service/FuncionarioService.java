@@ -22,9 +22,17 @@ public class FuncionarioService {
 		}
 	}
 	public Funcionario getFuncionarioById(Long id) {
+		Funcionario f = FuncionarioRep.buscarPeloId(id);
+		if(f==null){
+			throw new IllegalArgumentException("Funcionário com o id "+ id + " não foi encontrado.");
+		}
 		return FuncionarioRep.buscarPeloId(id);
 	}
 	public Funcionario getFuncionarioByCPF(String cpf) {
+		Funcionario f = FuncionarioRep.buscarPeloCPF(cpf);
+		if(f==null){
+			throw new IllegalArgumentException("Funcionário com o cpf "+ cpf + " não foi encontrado.");
+		}
 		return FuncionarioRep.buscarPeloCPF(cpf);
 	}
 

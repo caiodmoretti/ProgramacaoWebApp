@@ -33,14 +33,21 @@ public class EncomendaService {
 
 	
 	public String addEncomenda(Long funcionarioId, Long enderecoId, String nomeEntregador, String telefoneEntregador) {
-		Funcionario f = FuncionarioRep.buscarPeloId(funcionarioId);
-		Endereco endereco = EnderecoRep.buscarPeloId(enderecoId);
-		Encomenda e = new Encomenda(f, endereco, nomeEntregador,telefoneEntregador);
+		if(FuncionarioRep.buscarPeloId(funcionarioId) == null){
+			throw new IllegalArgumentException("Funcionário com o id "+ funcionarioId + " não foi encontrado.");
+		}
+		if(EnderecoRep.buscarPeloId(enderecoId) == null){
+			throw new IllegalArgumentException("Endereço com o id "+ enderecoId + " não foi encontrada.");
+		}
+		Encomenda e = new Encomenda(FuncionarioRep.buscarPeloId(funcionarioId), EnderecoRep.buscarPeloId(enderecoId), nomeEntregador,telefoneEntregador);
 		EncomendaRep.save(e);
 		return "Encomenda registrada no id " + e.getId();
 	}
 
 	public Encomenda getEncomendaById(Long id) {
+		if(EncomendaRep.buscarPeloId(id) == null){
+			throw new IllegalArgumentException("Encomenda com o id "+ id + " não foi encontrada.");
+		}
 		return EncomendaRep.buscarPeloId(id);
 	}
 

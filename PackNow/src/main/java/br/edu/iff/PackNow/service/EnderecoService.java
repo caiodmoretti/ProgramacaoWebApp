@@ -50,9 +50,16 @@ public class EnderecoService {
 		}
 	}
 	public Endereco getEnderecoById(Long id) {
+		if(EnderecoRep.buscarPeloId(id) == null){
+			throw new IllegalArgumentException("Endereço com o id "+ id + " não foi encontrado.");
+		}
 		return EnderecoRep.buscarPeloId(id);
 	}
+	
 	public Object getEnderecoByNumeroEBloco(String numero, String bloco) {
+		if(EnderecoRep.buscarPeloNumeroEBloco(numero, bloco)== null) {
+			throw new IllegalArgumentException("Endereço com o número "+ numero +" e bloco " + bloco +" não foi encontrado.");
+		}
 		return EnderecoRep.buscarPeloNumeroEBloco(numero, bloco);
 	}
 	public List<Endereco> listarEnderecos() {

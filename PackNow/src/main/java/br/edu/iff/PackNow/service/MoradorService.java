@@ -51,7 +51,7 @@ public class MoradorService {
 		Morador m = MoradorRep.buscarPeloId(id);
 		Endereco e = EnderecoRep.buscarPeloId(enderecoId);
 		if(m == null || e == null) {
-			return "Morador ou endereço não encontrado";
+			return "Morador ou endereço não encontrado.";
 		}
 			m.adicionarMoradorNoEndereco(e);	
 			MoradorRep.save(m);
@@ -78,10 +78,16 @@ public class MoradorService {
     }
     
 	public Morador getMoradorById(Long id) {
+		if(MoradorRep.buscarPeloId(id) == null){
+			throw new IllegalArgumentException("Morador com o id "+ id + " não foi encontrado.");
+		}
 		return MoradorRep.buscarPeloId(id);
 	}
 	
 	public Morador getMoradorByCPF(String cpf) {
+		if(MoradorRep.buscarPeloCPF(cpf) == null){
+			throw new IllegalArgumentException("Morador com o cpf "+ cpf + " não foi encontrado.");
+		}
 		return MoradorRep.buscarPeloCPF(cpf);
 	}
 
