@@ -19,7 +19,7 @@ import jakarta.validation.constraints.Size;
 public class Funcionario extends Pessoa  {
 	
 
-	@NotBlank(message = "Não pode ser em branco ou nulo")
+	@NotBlank(message = "Cargo não pode ser nulo ou ficar em branco")
     @Size(min = 1, max = 30, message = "O cargo deve ter entre 1 e 30 caracteres.")
     @Column(length = 30)
 	private String cargo;

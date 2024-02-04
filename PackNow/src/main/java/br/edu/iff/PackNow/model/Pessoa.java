@@ -21,14 +21,18 @@ public abstract class Pessoa implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Não pode ser em branco ou nulo")
+	
+	@NotBlank(message = "O cpf não pode ser nulo ou ficar em branco.")
 	@Column(name = "CPF", unique = true, length = 11)
 	private String cpf;
 	
-	@Size(min = 1, max = 60, message = "Tem que ter entre 1 e 60 caractéres")
-	@Column(length = 60)
+	@NotBlank(message = "O nome não pode ser nulo ou ficar em branco.")
+	@Size(min = 1, max = 60, message = "O nome deve ter entre 1 e 80 caracteres")
+	@Column(length = 80)
 	private String nome;
 
+	@NotBlank(message = "O telefone não pode ser nulo ou ficar em branco.")
+	@Size(min = 11, max = 11, message = "O telefone deve ter 11 caracteres")
 	@Column(length = 11)	
 	private String telefone;
 

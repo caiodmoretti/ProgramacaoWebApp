@@ -25,10 +25,10 @@ public class Endereco implements  Serializable  {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "Não pode ser em branco ou nulo")
+	@NotBlank(message = "Não pode ser nulo ou ficar em branco.")
 	private String numero;
 	
-	@NotBlank(message = "Não pode ser em branco ou nulo")
+
 	private String bloco;
 	
 //    @OneToMany(mappedBy="enderecoEntrega", cascade = CascadeType.PERSIST)

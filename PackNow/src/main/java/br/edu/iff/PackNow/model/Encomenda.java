@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 @Entity
 public class Encomenda implements Serializable  {
 	private static final long serialVersionUID = 1L;
@@ -40,8 +41,14 @@ public class Encomenda implements Serializable  {
 	
 	private String dataSaida;
 	
+	@NotBlank(message = "O nome do entregador não pode ser nulo ou ficar em branco.")
+	@Size(min = 1, max = 80, message = "O nome deve ter entre 1 e 80 caracteres")
+	@Column(length = 80)
 	private String nomeEntregador;
 	
+	@NotBlank(message = "O telefone do entregador não pode ser nulo ou ficar em branco.")
+	@Size(min = 11, max = 11, message = "O telefone deve ter 11 caracteres.")
+	@Column(length = 11)
 	private String telefoneEntregador;
 	
 	public Encomenda(Funcionario funcionario, Endereco enderecoEntrega, String nomeEntregador, String telefoneEntregador) {
