@@ -2,6 +2,7 @@ package br.edu.iff.PackNow.controller.apirest;
 import br.edu.iff.PackNow.model.Encomenda;
 import br.edu.iff.PackNow.model.Endereco;
 import br.edu.iff.PackNow.model.Funcionario;
+import br.edu.iff.PackNow.model.Morador;
 import br.edu.iff.PackNow.service.EncomendaService;
 
 import java.sql.Date;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,19 +31,19 @@ public class EncomendaRestController {
 	@PostMapping("")
 	@ResponseBody
 	@Operation(summary = "Adicionar uma encomenda")
-	public String addEncomenda(Funcionario funcionario, Endereco enderecoEntrega, LocalDate dataEntrada, String nomeEntregador, String telefoneEntregador) throws Exception{
-		return EncomendaServ.addEncomenda(new Encomenda(funcionario, enderecoEntrega, dataEntrada, nomeEntregador,telefoneEntregador));
+	public String addEncomenda(Long funcionarioId, Long enderecoEntregaId, String nomeEntregador, String telefoneEntregador) throws Exception{
+		return EncomendaServ.addEncomenda(funcionarioId, enderecoEntregaId, nomeEntregador,telefoneEntregador);
 	}
 	
 	@PutMapping("{id}/atualizar")
 	@ResponseBody
 	@Operation(summary = "Atualizar uma encomenda")
-	public String atualizarEncomenda(@PathVariable("id") Long id, Date dataEntrada, String nomeEntregador, String telefoneEntregador, Endereco enderecoEntrega) throws Exception{
+	public String atualizarEncomenda(@PathVariable("id") Long id, Funcionario funcionarioEntrada, Endereco enderecoEntrega, Morador moradorRetirada, String dataEntrada, String dataSaida, String nomeEntregador, String telefoneEntregador) throws Exception{
 		Encomenda eBusca = EncomendaServ.getEncomendaById(id);
 		if(eBusca == null) {
 			return "Encomenda não encontrado";
 		} else {
-			return null;
+			return EncomendaServ.atualizarEncomenda(id, funcionarioEntrada, enderecoEntrega, moradorRetirada, dataEntrada, dataSaida, nomeEntregador, telefoneEntregador);
 			//return EncomendaServ.atualizarEncomenda(eBusca.getEncomenda());
 		}
 	}
@@ -51,10 +53,9 @@ public class EncomendaRestController {
 	public String deletarEncomenda(@PathVariable("id") Long id) throws Exception {
 		Encomenda eBusca = EncomendaServ.getEncomendaById(id);
 		if(eBusca==null) {			
-			return "Encomenda não encontrado";
+			return "Encomenda não encontrada.";
 		}else {
-			return null;
-			//return EncomendaServ.deletarEncomenda(eBusca.getEncomenda());
+			return EncomendaServ.deletarEncomendaPorId(id);
 		}
 	}
 	@GetMapping("/listar")
@@ -71,16 +72,15 @@ public class EncomendaRestController {
 		return EncomendaServ.getEncomendaById(id);
 	}
 	
-	@PutMapping("/{id}/registrar-saida")
+	@PutMapping("/{id}/saida")
 	@ResponseBody
 	@Operation(summary = "Registrar saida de uma encomenda")
-	public String registrarSaidaEncomenda(@PathVariable("id")Long id,  Date dataSaida, String morador) throws Exception{
+	public String registrarSaidaEncomenda(@PathVariable("id")Long id, Long idMorador) throws Exception{
 		Encomenda eBusca = EncomendaServ.getEncomendaById(id);
 		if(eBusca == null) {
-			return "Encomenda não encontrado";
+			return "Encomenda não encontrada.";
 		} else {
-			return null;
-			//return EncomendaServ.registrarSaidaEncomenda(eBusca.getEncomenda());
+			return EncomendaServ.registrarSaida(id, idMorador);
 		}
 	}
 }

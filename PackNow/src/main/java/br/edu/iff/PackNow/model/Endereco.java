@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Endereco implements  Serializable  {
@@ -22,16 +25,18 @@ public class Endereco implements  Serializable  {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "Não pode ser nulo ou ficar em branco.")
 	private String numero;
+	
+
 	private String bloco;
-	@JoinColumn(name="id_morador")
-	@OneToMany
-	private Set<Morador> moradores;
+	
+//    @OneToMany(mappedBy="enderecoEntrega", cascade = CascadeType.PERSIST)
+//    private List<Encomenda> encomendas;
 	
 	public Endereco(String numero, String bloco) {
 		this.setNumero(numero);
 		this.setBloco(bloco);
-		this.moradores = new HashSet<Morador>();
 	};
 	public Endereco() {
 	}
@@ -54,35 +59,15 @@ public class Endereco implements  Serializable  {
 		}
 		this.bloco = bloco;
 	};
-	/**
-	 * @param the morador to moradores
-	 */
-	public void adicionarMorador(Morador morador) {
-		if(morador == null) {
-			throw new IllegalArgumentException("Morador não pode ser nulo.");
-		}
-		this.moradores.add(morador);
-		
+
+	public String getNumero() {
+		return numero;
 	}
-	/**
-	 * @param remove the morador
-	 */
-	public void removerMorador(Morador morador) {
-		if(morador == null) {
-			throw new IllegalArgumentException("Morador não pode ser nulo.");
-		}
-		if(this.moradores.contains(morador)) {
-			this.moradores.remove(morador);
-		}
-		else{
-			throw new IllegalStateException("Morador não está associado a este endereço.");
-		}
+	public String getBloco() {
+		return bloco;
 	}
-	/**
-	 * @return the iterator for moradores
-	 */
-	public Iterator<Morador> getMoradores(){
-		return Collections.unmodifiableSet(this.moradores).iterator();
+	public Long getId() {
+		return id;
 	}
 
 

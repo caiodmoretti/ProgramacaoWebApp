@@ -37,7 +37,7 @@ public class EnderecoRestController {
 		if(eBusca == null) {
 			return "Endereco não encontrado";
 		} else {
-			return EnderecoServ.atualizarEndereco(eBusca);
+			return EnderecoServ.atualizarEndereco(id, numero, bloco);
 		}
 	}
 	@DeleteMapping("/{id}")
@@ -48,7 +48,7 @@ public class EnderecoRestController {
 		if(eBusca==null) {			
 			return "Endereço não encontrado";
 		}else {
-			return EnderecoServ.deletarEntedereco(eBusca);
+			return EnderecoServ.deletarEntedereco(id);
 		}
 	}
 	

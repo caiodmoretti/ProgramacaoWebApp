@@ -1,46 +1,76 @@
 package br.edu.iff.PackNow.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 @Entity
-public class Encomenda  {
-	
+public class Encomenda implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@JoinColumn(name="fk_funcionarioEntrada")
+	
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name="funcionario_id" )
 	private Funcionario funcionarioEntrada;
-	@JoinColumn(name="fk_moradorRetirada")
-	private Morador moradorRetirada;
-	@JoinColumn(name="fk_endereco")
+	
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name="endereco_id")
 	private Endereco enderecoEntrega;
-	@Temporal(TemporalType.DATE)
-	private LocalDate dataEntrada;
-	@Temporal(TemporalType.DATE)
-	private LocalDate dataSaida;
+	
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name="morador_id", nullable = true)
+	private Morador moradorRetirada;
+
+	private String dataEntrada;
+	
+	private String dataSaida;
+	
+	@NotBlank(message = "O nome do entregador não pode ser nulo ou ficar em branco.")
+	@Size(min = 1, max = 80, message = "O nome deve ter entre 1 e 80 caracteres")
+	@Column(length = 80)
 	private String nomeEntregador;
+	
+	@NotBlank(message = "O telefone do entregador não pode ser nulo ou ficar em branco.")
+	@Size(min = 11, max = 11, message = "O telefone deve ter 11 caracteres.")
+	@Column(length = 11)
 	private String telefoneEntregador;
 	
-	public Encomenda(Funcionario funcionario, Endereco enderecoEntrega, LocalDate dataEntrada, String nomeEntregador, String telefoneEntregador) {
-		this.setFuncionario(funcionario);
-		this.setEndereco(enderecoEntrega);
-		this.dataEntrada = LocalDate.now();
-		this.setNomeEntregador(nomeEntregador);
-		this.setTelefoneEntregador(telefoneEntregador);
+	public Encomenda(Funcionario funcionario, Endereco enderecoEntrega, String nomeEntregador, String telefoneEntregador) {
+		this.funcionarioEntrada = funcionario;
+		this.enderecoEntrega = enderecoEntrega;
+		this.nomeEntregador = nomeEntregador;
+		this.telefoneEntregador = telefoneEntregador;
+		this.moradorRetirada = null;
+		this.dataEntrada = obterHoraEmFormatoString();
 	}
 	public Encomenda() {};
 	/**
 	 * @param the funcionarioEntrada to set
 	 */
+	public String obterHoraEmFormatoString() {
+        LocalDateTime currentDate = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = currentDate.format(formatter);
+        return formattedDate;
+	}
+	
 	public void setFuncionario(Funcionario funcionario) {
 		if(funcionario == null) {
 			throw new IllegalArgumentException("Funcionário não pode ser nulo.");
@@ -77,14 +107,18 @@ public class Encomenda  {
 	/**
 	 * @param the dataSaida to set
 	 */
-	public void registrarRetirada() {
-		this.dataSaida = LocalDate.now();
+	public void registrarRetirada(Morador morador) {
+		this.dataSaida = obterHoraEmFormatoString();
+		this.moradorRetirada = morador;
 	}
 	/**
 	 * @return the funcionarioEntrada
 	 */
 	public Funcionario getFuncionarioEntrada() {
 		return this.funcionarioEntrada;
+	}
+	public void setMoradorRetirada(Morador moradorRetirada) {
+		this.moradorRetirada = moradorRetirada;
 	}
 	/**
 	 * @return the moradorRetirada
@@ -101,17 +135,14 @@ public class Encomenda  {
 	/**
 	 * @return the dataEntrada
 	 */
-	public LocalDate getDataEntrada() {
+	public String getDataEntrada() {
 
 		return this.dataEntrada;
 	}
 	/**
 	 * @return the dataSaida
 	 */
-	public LocalDate getDataSaida() {
-		if(this.dataEntrada == null) {
-			throw new IllegalStateException("Encomenda ainda não foi retirada");
-		}
+	public String getDataSaida() {
 		return this.dataSaida;
 	}
 	/**
@@ -125,6 +156,15 @@ public class Encomenda  {
 	 */
 	public String getTelefoneEntregador() {
 		return this.telefoneEntregador;
+	}
+	public Long getId() {
+		return this.id;
+	}
+	public void setDataEntrada(String dataEntrada) {
+		this.dataEntrada = dataEntrada;
+	}
+	public void setDataSaida(String dataSaida) {
+		this.dataSaida = dataSaida;
 	}
 
 	

@@ -3,6 +3,7 @@ package br.edu.iff.PackNow.controller.apirest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,18 +33,18 @@ public class FuncionarioRestController {
 	@PutMapping("/{id}")
 	@ResponseBody
 	@Operation(summary = "Atualizar um funcionário")
-	public String atualizarFuncionario(@PathVariable("id") int id, String nome, String email, String senha, String funcao) throws Exception{
+	public String atualizarFuncionario(@PathVariable("id") long id, String nome, String telefone, String cpf, String cargo) throws Exception{
 		Funcionario fBusca = FuncionarioServ.getFuncionarioById(id);
 		if(fBusca == null) {
 			return "Funcionário não encontrado";
 		} else {
-			return FuncionarioServ.atualizarFuncionario(fBusca.getCpf());
+			return FuncionarioServ.atualizarFuncionario(id, nome, telefone, fBusca.getCpf(), cargo);
 		}
 	}
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@Operation(summary = "Deletar um funcionário")
-	public String deletarFuncionarioCPF(@PathVariable("id") int id) throws Exception {
+	public String deletarFuncionarioCPF(@PathVariable("id") Long id) throws Exception {
 		Funcionario fBusca = FuncionarioServ.getFuncionarioById(id);
 		if(fBusca==null) {			
 			return "Funcionario não encontrado";
