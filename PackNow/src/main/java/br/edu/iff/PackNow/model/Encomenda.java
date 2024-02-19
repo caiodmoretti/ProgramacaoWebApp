@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 @Entity
 public class Encomenda implements Serializable  {
@@ -25,10 +26,12 @@ public class Encomenda implements Serializable  {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull(message = "O funcionário que recebeu a encomenda não pode ser nulo ou ficar em branco.")
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name="funcionario_id" )
 	private Funcionario funcionarioEntrada;
 	
+	@NotNull(message = "O endereço de entrega da encomenda não pode ser nulo ou ficar em branco.")
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name="endereco_id")
 	private Endereco enderecoEntrega;
