@@ -7,18 +7,47 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Sticky Footer Navbar Template · Bootstrap v5.3</title>
+    <title>PackNow</title>
     
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sticky-footer-navbar/">
 
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<link rel="icon" href="/img/favicon_1.ico" type="image/x-icon">
 
     <style>
+		.bg-custom-azul {
+   			background-color: #075472 !important;
+		}
+		.bg-custom-amarelo {
+    		background-color: #fec13e!important;
+		}
+		.bg-custom-laranja {
+    		background-color: #ec9929!important;
+		}
+		.btn-outline-laranja{
+		    color: #ec9929;
+		    border-color: #ffffff;
+		}
+		.btn-outline-laranja:hover {
+		    color: #fff; /* Altera a cor do texto quando o botão é hover para garantir legibilidade */
+		    background-color: #ec9929; /* Altera a cor de fundo quando o botão é hover */
+		    border-color: #ec9929; /* Mantém a mesma cor de contorno quando o botão é hover */
+		}
+	    main {
+	        margin-top: 56px; /* altura da navbar */
+	    }
+	
+	    @media (min-width: 992px) {
+	        main {
+	            margin-top: 68px; /* altura da navbar em telas grandes */
+	        }
+	    }
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -118,8 +147,8 @@
       </symbol>
     </svg>
 
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle ">
+      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center "
               id="bd-theme"
               type="button"
               aria-expanded="false"
@@ -156,28 +185,43 @@
     
 <header>
   <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Fixed navbar</a>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-custom-azul ">
+    <div class="container" >
+      <a class="navbar-brand " href="#">
+		<img th:src="@{/img/logo_pequeno_1.png}" alt="Logo" style=" margin-left: 0px; width: 85%; ">
+	  </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <li class="nav-item" style="margin-right: 10px;">
+				<button class="btn btn-outline-laranja text-light" type="button" data-bs-haspopup="true" aria-expanded="false"><i class="fas fa-home"  style="margin-right: 6px;"></i>Início</button>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
+          <li style="margin-right: 10px;">
+		  	<div class="input-group mb-3 ">
+			  <div class="input-group-prepend ">
+			    <button class="btn btn-outline-laranja dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false"> <i class="fas fa-search "style="margin-right: 8px;"></i>Consultar</button>
+			    <div class="dropdown-menu">
+			      <a class="dropdown-item" href="#">Encomenda</a>
+			      <a class="dropdown-item" href="#">Morador</a>
+			      <a class="dropdown-item" href="#">Endereço</a>
+			  </div>
+			</div>
+		  </li>
+          <li >
+		  	<div class="input-group mb-3 ">
+			  <div class="input-group-prepend ">
+			    <button class="btn btn-outline-laranja dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false"> <i class="fas fa-plus " style="margin-right: 4px;"></i> Adicionar</button>
+			    <div class="dropdown-menu">
+			      <a class="dropdown-item" href="#">Encomenda</a>
+			      <a class="dropdown-item" href="#">Morador</a>
+			      <a class="dropdown-item" href="#">Endereço</a>
+			  </div>
+			</div>
+		  </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+		<button class="btn btn-outline-laranja text-light" type="button" data-bs-haspopup="true" aria-expanded="false"><i class="fas fa-sign-in-alt"  style="margin-right: 6px;"></i>Login</button>
       </div>
     </div>
   </nav>
@@ -185,16 +229,17 @@
 
 <!-- Begin page content -->
 <main class="flex-shrink-0">
-  <div class="container">
+  <div class="container ">
     <h1 class="mt-5">Conteúdo principal</h1>
-    <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code class="small">padding-top: 60px;</code> on the <code class="small">main &gt; .container</code>.</p>
-    <p>Back to <a href="../examples/sticky-footer/">the default sticky footer</a> minus the navbar.</p>
+    <p class="lead">Lorem ipsum commodo ligula mauris aenean eu aliquam ad, etiam ornare eu maecenas mauris vitae vehicula.</p>
+    <p>Lorem ipsum commodo ligula mauris aenean eu aliquam ad, etiam ornare eu maecenas mauris vitae vehicula. dictum fermentum sapien risus nostra venenatis odio tortor ut pulvinar primis dolor commodo vulputate, tellus ullamcorper magna fermentum duis ante nulla massa leo volutpat porta. scelerisque eu nec interdum aliquam sagittis habitant litora, aptent donec magna turpis condimentum nullam lorem, sodales aenean nam praesent sit non. </p>
   </div>
 </main>
 
-<footer class="footer mt-auto py-3 bg-body-tertiary">
+<footer class="footer mt-auto py-3 bg-body-tertiary  bg-custom-azul">
   <div class="container">
-    <span class="text-body-secondary">Place sticky footer content here.</span>
+	<p style="color: #FFFFFF; margin-bottom: 5px; margin-top: -10x;">IFF BSI - 2023.2</p>
+	<p style="color: #FFFFFF; margin-bottom: 5px;"> <i class='fas fa-envelope' style="color: #FFFFFF;"></i> contato@gmail.com</p>
   </div>
 </footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
