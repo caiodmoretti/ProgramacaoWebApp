@@ -5,10 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path = "crud")
+@RequestMapping(path = "")
 public class MainControlerView {
 	@GetMapping("/")
 	public String cruds(){
 		return "layoutBase";
+	}
+	@GetMapping("/pagina1")
+	public String teste(){
+		return "pagina1";
 	}
 }
