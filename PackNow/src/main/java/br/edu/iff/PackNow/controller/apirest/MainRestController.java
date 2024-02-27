@@ -1,5 +1,4 @@
-
-package br.edu.iff.PackNow.controller;
+package br.edu.iff.PackNow.controller.apirest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path = "")
-public class MainController {
+public class MainRestController {
 	
 	@GetMapping(path = "/")
 	@ResponseBody
@@ -18,5 +17,4 @@ public class MainController {
 	}
 
 }
-
 
