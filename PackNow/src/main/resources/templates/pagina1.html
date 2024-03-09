@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	
     <title>Title da pagina1</title>
-    <link th:replace="~{layoutBase :: frag_head}">
-    <style>
-		main {
-	        margin-top: 105px; /* altura da navbar */
-	    }
-	</style>
+	<div th:replace="head :: frag_head"></div>
+
 </head>
 
-<body class="d-flex flex-column h-100">
-	<link th:replace="~{layoutBase :: frag_header}">
+<body >
+	<div th:replace="layoutBase :: frag_body"></div>
+	<header >
+		<div th:insert:"header :: frag_header"></div>
+
+	</header>
+
 	    <!-- Conteúdo da página -->
 		<main>
 		<div class="container">
@@ -23,9 +23,7 @@
 		</div>				
 		</main>
 
-	<footer >
-		<link th:replace="~{layoutBase :: frag_footer}">
-	</footer>
+		<div th:insert="footer :: frag_footer"></div>
 	
 </body>
 
