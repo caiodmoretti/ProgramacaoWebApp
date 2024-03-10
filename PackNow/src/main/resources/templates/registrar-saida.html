@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Registrar saída de encomenda</title>
+    <div th:replace="~{head :: frag_head}"></div>
+</head>
+
+<body>
+    <div th:replace="~{layoutBase :: frag_body}"></div>
+    <header>
+        <div th:insert="~{header :: frag_header}"></div>
+    </header>
+    <!-- Conteúdo da página -->
+    <main>
+        <div class="container">
+            <h1>Entre com as informações de saída da encomenda</h1>
+            <form>
+                <p><b>Funcionário reponsável pela entrada: </b> John Lenon </p>
+				<p><b>Endereço de entrega: </b> Bloco 1, 101 </p>
+   				<div class="btn-group" >
+                    <button class="btn btn-primary dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false">
+                        Selecione um morador para retirada
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Morador 1</a>
+                        <a class="dropdown-item" href="#">Morador 2</a>
+                        <a class="dropdown-item" href="#">Morador 3</a>
+                    </div>
+                </div>
+
+            </form>
+            <div style="padding-top: 10px;">
+				<button type="submit" class="btn btn-success">Registra saída</button>
+                <a  href="#" class="btn btn-secondary">Voltar</a>
+			</div>
+        </div>
+    </main>
+    <div th:insert="~{footer :: frag_footer}"></div>
+</body>
+
+</html>

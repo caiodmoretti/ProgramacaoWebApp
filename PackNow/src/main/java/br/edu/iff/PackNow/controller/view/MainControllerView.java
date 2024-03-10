@@ -15,4 +15,32 @@ public class MainControllerView {
 	public String teste(){
 		return "pagina1";
 	}
+	@GetMapping("visualizar-encomendas")
+	public String visualizarEncomendas(){
+		return "visualizar-encomendas";
+	}
+	@GetMapping("visualizar-moradores")
+	public String visualizarMoradores(){
+		return "visualizar-moradores";
+	}
+	@GetMapping("visualizar-enderecos")
+	public String visualizarEnderecos(){
+		return "visualizar-enderecos";
+	}
+	@GetMapping("adicionar-encomenda")
+	public String adicionarEncomenda(){
+		return "adicionar-encomenda";
+	}
+	@GetMapping("registrar-saida")
+	public String registraSaida(){
+		return "registrar-saida";
+	}
+	@GetMapping("adicionar-morador")
+	public String adicionarMorador(){
+		return "adicionar-morador";
+	}
+	@GetMapping("adicionar-endereco")
+	public String adicionarEndereco(){
+		return "adicionar-endereco";
+	}
 }

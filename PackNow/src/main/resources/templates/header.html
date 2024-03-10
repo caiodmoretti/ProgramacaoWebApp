@@ -6,7 +6,7 @@
 
 	</head>
 	<body>
-		    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+	<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
       </symbol>
@@ -71,16 +71,17 @@
 		      <div class="collapse navbar-collapse" id="navbarCollapse">
 		        <ul class="navbar-nav me-auto mb-2 mb-md-0">
 		          <li class="nav-item" style="margin-right: 10px;">
-						<button class="btn btn-outline-laranja text-light" type="button" data-bs-haspopup="true" aria-expanded="false"><i class="fas fa-home"  style="margin-right: 6px;"></i>Início</button>
+					  <a th:href="@{/pagina1}"> <button class="btn btn-outline-laranja text-light" type="button" data-bs-haspopup="true" aria-expanded="false"><i class="fas fa-home"  style="margin-right: 6px;"></i>Início</button> </a>
+						
 		          </li>
 		          <li style="margin-right: 10px;">
 				  	<div class="input-group mb-3 ">
 					  <div class="input-group-prepend ">
 					    <button class="btn btn-outline-laranja dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false"> <i class="fas fa-search "style="margin-right: 8px;"></i>Consultar</button>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="#">Encomenda</a>
-					      <a class="dropdown-item" href="#">Morador</a>
-					      <a class="dropdown-item" href="#">Endereço</a>
+						<a class="dropdown-item" th:href="@{/visualizar-encomendas}">Encomenda</a>
+					      <a class="dropdown-item" th:href="@{/visualizar-moradores}">Morador</a>
+					      <a class="dropdown-item" th:href="@{/visualizar-enderecos}">Endereço</a>
 					  </div>
 					</div>
 				  </li>
@@ -89,9 +90,9 @@
 					  <div class="input-group-prepend ">
 					    <button class="btn btn-outline-laranja dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false"> <i class="fas fa-plus " style="margin-right: 4px;"></i> Adicionar</button>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="#">Encomenda</a>
-					      <a class="dropdown-item" href="#">Morador</a>
-					      <a class="dropdown-item" href="#">Endereço</a>
+					      <a class="dropdown-item" th:href="@{/adicionar-encomenda}">Encomenda</a>
+					      <a class="dropdown-item" th:href="@{/adicionar-morador}">Morador</a>
+					      <a class="dropdown-item" th:href="@{/adicionar-endereco}">Endereço</a>
 					  </div>
 					</div>
 				  </li>

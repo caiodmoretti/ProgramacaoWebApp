@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Title da pagina1</title>
-	<div th:replace="head :: frag_head"></div>
+    <title>Title da home</title>
+	<div th:replace="~{head :: frag_head}"></div>
 
 </head>
 
 <body >
-	<div th:replace="layoutBase :: frag_body"></div>
+	<div th:replace="~{layoutBase :: frag_body}"></div>
 	<header >
-		<div th:insert:"header :: frag_header"></div>
+		<div th:insert:"~{header :: frag_header}"></div>
 
 	</header>
-
 	    <!-- Conteúdo da página -->
 		<main>
 		<div class="container">
-			<h1>Este é o h1 da nova página.</h1>
-			<p>Este é o p1 da nova página.</p>
-			<p>Este é o p2 da nova página.</p>
-			<p>Este é o p3 da nova página.</p>		
+			<h1>Este é o h1 da home.</h1>
+			<p>Este é o p1 da home.</p>
+	
 		</div>				
 		</main>
-
-		<div th:insert="footer :: frag_footer"></div>
+		<div th:insert="~{footer :: frag_footer}"></div>
 	
 </body>
 
