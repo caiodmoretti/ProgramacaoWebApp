@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Visualizar moradores</title>
+    <title>Title da pagina1</title>
 	<div th:replace="~{head :: frag_head}"></div>
-			<!-- Adicionando o jQuery -->
+				<!-- Adicionando o jQuery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
@@ -18,17 +18,16 @@
 	    <!-- Conteúdo da página -->
 <main>
  <div class="container">
-
+	 	  <!-- Barra de pesquisa -->
 		<div  class="row">
 				<div class="col-md-4">
-				  	<h1><b>Lista de moradores</b></h1>
+				  	<h1><b>Lista de endereços</b></h1>
 				</div>
   				<div class="col-md-4 offset-md-4">
 				</div>		
 		</div>
-    <table id="moradoresTable" class="table table-striped">
-			<!-- Barra de pesquisa -->
-			<div  class="row">
+    <table id="enderecosTable" class="table table-striped">
+		<div  class="row">
 			<div class="col-md-4"></div>
   				<div class="col-md-4 offset-md-4">
 					<div class="d-flex align-items-center">
@@ -40,39 +39,22 @@
       <thead class="thead-dark">
         <tr>
           <th>Id</th>
-          <th>Nome</th>
-          <th>CPF</th>
-          <th>Telefone</th>
-          <th>Endereço</th>
-          <th>Ações</th>
+          <th>Bloco</th>
+          <th>Número</th>
+          <th style="text-align: center;">Ações</th>
         </tr>
       </thead>
       <tbody>
-        <!-- tabela com os dados dos moradores -->
-        <tr>
-          <td>1</td>
-          <td>Ringo Star</td>
-          <td>10020030099</td>
-          <td>987653421</td>
-          <td>Bloco 1, 101</td>
-          <td>
+        <!-- tabela com os dados dos endereços -->
+        <tr th:each="endereco: ${endereco_lista}">
+          <td th:text="${endereco.id}"></td>
+          <td th:text="${endereco.bloco}"></td>
+          <td th:text="${endereco.numero}"></td>
+          <td style="text-align: center;">
             <!-- Botões de editar e deletar -->
             <button class="btn btn-primary">Editar</button>
             <button class="btn btn-danger">Deletar</button>
           </td>
-        </tr>
-         <tr>
-          <td>2</td>
-          <td>Paul McCartney</td>
-          <td>10020030099</td>
-          <td>987653421</td>
-          <td>Bloco 2, 102</td>
-          <td>
-            <!-- Botões de editar e deletar -->
-            <button class="btn btn-primary">Editar</button>
-            <button class="btn btn-danger">Deletar</button>
-          </td>
-        </tr>
       </tbody>
     </table>
   </div>							
@@ -88,7 +70,7 @@
 	    // Adicionando funcionalidade de pesquisa
 	    $('#searchInput').on('keyup', function(){
 	      var searchText = $(this).val().toLowerCase();
-	      $('#moradoresTable tbody tr').each(function(){
+	      $('#enderecosTable tbody tr').each(function(){
 	        var rowData = $(this).text().toLowerCase();
 	        if(rowData.indexOf(searchText) == -1){
 	          $(this).hide();

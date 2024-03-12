@@ -39,8 +39,8 @@ public class MainControllerView {
 	public String adicionarMorador(){
 		return "adicionar-morador";
 	}
-	@GetMapping("adicionar-endereco")
+	/*@GetMapping("adicionar-endereco")
 	public String adicionarEndereco(){
 		return "adicionar-endereco";
-	}
+	}*/
 }
