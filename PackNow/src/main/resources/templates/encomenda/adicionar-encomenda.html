@@ -14,34 +14,34 @@
     <!-- Conteúdo da página -->
     <main>
         <div class="container">
-            <h1>Entre com as informações de entrada da encomenda</h1>
-            <form>
-  				<div class="btn-group" style="padding-top: 10px;">
-                    <button class="btn btn-primary dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false">
-                        Selecione um funcionário responsável pela entrega
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Funcionário 1</a>
-                        <a class="dropdown-item" href="#">Funcionário 2</a>
-                        <a class="dropdown-item" href="#">Funcionário 3</a>
-                    </div>
-                </div>
+            <h1>Entre com as informações da encomenda</h1>
+            <form th:action="@{/encomenda/registrar}" th:object="${encomenda}" method="post">
+			<label for="funcionarioId"><h3>Selecione o Funcionário que recebeu a encomenda</h3></label>
+			<div class="dropdown">
+			    <select class="btn btn-primary" style=" width: 300px;" id="funcionarioId" name="funcionarioId" data-toggle="dropdown">
+			        <option value="" selected>Escolha o funcionário de entrada</option>
+			        <option th:each="funcionario : ${funcionarios}" th:value="${funcionario.id}" th:text="${funcionario.nome + ' - ' +funcionario.cargo }"></option>
+			    </select>
+			</div>
                 <br>
-   				<div class="btn-group" style="padding-top: 10px;">
-                    <button class="btn btn-primary dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false">
-                        Selecione um endereço de entrega
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Endereço 1</a>
-                        <a class="dropdown-item" href="#">Endereço 2</a>
-                        <a class="dropdown-item" href="#">Endereço 3</a>
-                    </div>
-                </div>
+                <label for="enderecoId"><h3>Selecione o endereço de entrega</h3></label>
+				<div class="dropdown">
+				    <select class="btn btn-primary" style=" width: 300px;" id="enderecoId" name="enderecoId" data-toggle="dropdown">
+				        <option value="" selected>Escolha o endereço</option>
+				        <option th:each="endereco : ${enderecos}" th:value="${endereco.id}" th:text="${'Bloco ' + endereco.bloco + ' - Número ' + endereco.numero}"></option>
+				    </select>
+				</div>
+		    <br>
+			<label for="nome">Nome do entregador:</label>
+	        <input type="text" class="form-control" style="width: 350px; border-color: black" id="nomeEntregador" name="nomeEntregador" ><br>
 
-            </form>
+			<label for="nome">Telefone do entregador:</label>
+	        <input type="text" class="form-control" style="width: 350px; border-color: black" id="telefoneEntregador" name="telefoneEntregador"><br>
             <div style="padding-top: 10px;">
-				<button type="submit" class="btn btn-primary">Adicionar</button>
+	        <input  class="btn btn-primary" type="submit" value="Adicionar">
                 <a  href="#" class="btn btn-secondary">Voltar</a>
+            </form>
+
 			</div>
         </div>
     </main>

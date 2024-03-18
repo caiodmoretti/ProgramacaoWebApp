@@ -57,7 +57,7 @@
           <td>
             <!-- Botões de editar e deletar -->
           <a th:href="@{/funcionario/edit/{id}(id=${funcionario.id})}" class="btn btn-primary">Editar</button>
- 		  <a id="deleteButton" th:href="@{/funcionario/delete/{cpf}(cpf=${funcionario.cpf})}" class="btn btn-danger">Deletar</a>
+		<a href="#" class="btn btn-danger deleteButton" th:href="@{/funcionario/delete/{id}(id=${encomenda.id})}">Deletar</a>
           </td>
         </tr>
         
@@ -87,19 +87,25 @@
 	    });
 	  });
 	</script>
-	<script>
-	    document.getElementById("deleteButton").addEventListener("click", function(event) {
-	        event.preventDefault(); // Evita que o link seja seguido imediatamente
-	
-	        // Mostra o pop-up de confirmação
-	        var confirmDelete = confirm("Você tem certeza que quer deletar esse funcionário?");
-	
-	        // Se o usuário confirmar, segue com a deleção
-	        if (confirmDelete) {
-	            window.location.href = event.target.getAttribute("href");
-	        }
-	    });
-	</script>
+		<script>
+		    // Seleciona todos os elementos com a classe deleteButton
+		    var deleteButtons = document.querySelectorAll('.deleteButton');
+		
+		    // Adiciona um evento de clique para cada botão de exclusão
+		    deleteButtons.forEach(function(button) {
+		        button.addEventListener("click", function(event) {
+		            event.preventDefault(); // Evita que o link seja seguido imediatamente
+		
+		            // Mostra o pop-up de confirmação
+		            var confirmDelete = confirm("Você tem certeza que quer deletar esse funcionário?");
+		
+		            // Se o usuário confirmar, segue com a deleção
+		            if (confirmDelete) {
+		                window.location.href = event.target.getAttribute("href");
+		            }
+		        });
+		    });
+		</script>
 
 
 </html>

@@ -1,112 +1,120 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <title>Visualizar encomendas</title>
-
-	<div th:replace="~{head :: frag_head}"></div>
-		<!-- Adicionando o jQuery -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-</head>
-
-<body >
-	<div th:replace="~{layoutBase :: frag_body}"></div>
-	<header >
-		<div th:insert:"~{header :: frag_header}"></div>
-
-	</header>
-	    <!-- Conteúdo da página -->
-<main>
- <div class="container">
-		<div  class="row">
-				<div class="col-md-4">
-				  	<h1><b>Lista de encomendas</b></h1>
-				</div>
-  				<div class="col-md-4 offset-md-4">
-				</div>		
-		</div>
-    
-    <table id="encomendasTable" class="table table-striped">
-		<!-- Barra de pesquisa -->
-			<div  class="row">
-			<div class="col-md-4"></div>
-  					<div class="col-md-4 offset-md-4">
-					<div class="d-flex align-items-center">
-				        <i class="fas fa-search" style="font-size: 25px; margin-right: 8px; padding-bottom: 10px;"></i>
-				        <input type="text" id="searchInput" class="form-control mb-3" style="width: 350px;" placeholder="Entre com um termo para pesquisar na lista...">
-				    </div>
-			</div>		
-		</div>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Funcionário de entrada</th>
-          <th>Endereço de entrega</th>
-          <th>Data de entrada</th>
-          <th>Data de saída</th>
-          <th>Morador que retirou</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- tabela com os dados das encomendas -->
-        <tr>
-          <td>1</td>
-          <td>George Harison</td>
-          <td>Bloco 1, 101</td>
-          <td>2024-02-28</td>
-          <td>2024-03-02</td>
-          <td>Paul McCartney</td>
-          <td>
-            <!-- Botões de editar e deletar -->
-            <button class="btn btn-success">Registra saída</button>
-            <button class="btn btn-primary">Editar</button>
-            <button class="btn btn-danger">Deletar</button>
-          </td>
-        </tr>
-                <tr>
-          <td>2</td>
-          <td>John Lenon</td>
-          <td>Bloco 1, 102</td>
-          <td>2024-02-28</td>
-          <td>2024-03-02</td>
-          <td>Ringo Star</td>
-          <td>
-            <!-- Botões de editar e deletar -->
-             <button class="btn btn-success">Registra saída</button>
-            <button class="btn btn-primary">Editar</button>
-            <button class="btn btn-danger">Deletar</button>
-          </td>
-        </tr>
-        <!-- Você pode adicionar mais linhas conforme necessário -->
-      </tbody>
-    </table>
-  </div>							
-</main>
-		<div th:insert="~{footer :: frag_footer}"></div>
 	
-</body>
-
-<!-- Adicionando o Bootstrap JavaScript -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-  $(document).ready(function(){
-    // Adicionando funcionalidade de pesquisa
-    $('#searchInput').on('keyup', function(){
-      var searchText = $(this).val().toLowerCase();
-      $('#encomendasTable tbody tr').each(function(){
-        var rowData = $(this).text().toLowerCase();
-        if(rowData.indexOf(searchText) == -1){
-          $(this).hide();
-        } else {
-          $(this).show();
-        }
-      });
-    });
-  });
-</script>
+	<head>
+	    <title>Visualizar encomendas</title>
+	
+		<div th:replace="~{head :: frag_head}"></div>
+			<!-- Adicionando o jQuery -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	
+	</head>
+	
+	<body >
+		<div th:replace="~{layoutBase :: frag_body}"></div>
+		<header >
+			<div th:insert:"~{header :: frag_header}"></div>
+	
+		</header>
+		    <!-- Conteúdo da página -->
+	<main>
+	 <div class="container">
+			<div  class="row">
+					<div class="col-md-4">
+					  	<h1><b>Lista de encomendas</b></h1>
+					</div>
+	  				<div class="col-md-4 offset-md-4">
+					</div>		
+			</div>
+	    
+	    <table id="encomendasTable" class="table table-striped">
+			<!-- Barra de pesquisa -->
+				<div  class="row">
+				<div class="col-md-4"></div>
+	  					<div class="col-md-4 offset-md-4">
+						<div class="d-flex align-items-center">
+					        <i class="fas fa-search" style="font-size: 25px; margin-right: 8px; padding-bottom: 10px;"></i>
+					        <input type="text" id="searchInput" class="form-control mb-3" style="width: 350px;" placeholder="Entre com um termo para pesquisar na lista...">
+					    </div>
+				</div>		
+			</div>
+	      <thead>
+	        <tr>
+	          <th>Id</th>
+	          <th>Funcionário de entrada</th>
+	          <th>Endereço de entrega</th>
+	          <th>Data de entrada</th>
+	          <th>Data de saída</th>
+	          <th>Morador que retirou</th>
+	          <th>Ações</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <!-- tabela com os dados das encomendas -->
+	        <tr th:each="encomenda: ${encomenda_lista}">
+	          <td th:text="${encomenda.id}"></td>
+	          <td th:text="${encomenda.funcionarioEntrada.nome}"></td>
+	          
+	          <td th:text="'Bloco '+${encomenda.enderecoEntrega.bloco} + ' Número ' + ${encomenda.enderecoEntrega.numero}"></td>
+	          <td th:text="${encomenda.dataEntrada}"></td>
+	          <td th:text="${encomenda.dataSaida}"></td>
+				<td th:text="${encomenda.moradorRetirada != null ? encomenda.moradorRetirada.nome : '-'}"></td>
+	
+	          <td>
+	            <!-- Botões de editar e deletar -->
+	            
+				<a th:href="@{/encomenda/registrarSaidaForm/{id}(id=${encomenda.id})}" class="btn btn-success">Registra saída</a>
+	
+	            <button class="btn btn-primary">Editar</button>
+				<a href="#" class="btn btn-danger deleteButton" th:href="@{/encomenda/delete/{id}(id=${encomenda.id})}">Deletar</a>
+	          </td>
+	        </tr>
+	      </tbody>
+	    </table>
+	  </div>							
+	</main>
+			<div th:insert="~{footer :: frag_footer}"></div>
+		
+	</body>
+	
+	<!-- Adicionando o Bootstrap JavaScript -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+		<script>
+		  $(document).ready(function(){
+		    // Adicionando funcionalidade de pesquisa
+		    $('#searchInput').on('keyup', function(){
+		      var searchText = $(this).val().toLowerCase();
+		      $('#encomendasTable tbody tr').each(function(){
+		        var rowData = $(this).text().toLowerCase();
+		        if(rowData.indexOf(searchText) == -1){
+		          $(this).hide();
+		        } else {
+		          $(this).show();
+		        }
+		      });
+		    });
+		  });
+		</script>
+		<script>
+		    // Seleciona todos os elementos com a classe deleteButton
+		    var deleteButtons = document.querySelectorAll('.deleteButton');
+		
+		    // Adiciona um evento de clique para cada botão de exclusão
+		    deleteButtons.forEach(function(button) {
+		        button.addEventListener("click", function(event) {
+		            event.preventDefault(); // Evita que o link seja seguido imediatamente
+		
+		            // Mostra o pop-up de confirmação
+		            var confirmDelete = confirm("Você tem certeza que quer deletar essa encomenda?");
+		
+		            // Se o usuário confirmar, segue com a deleção
+		            if (confirmDelete) {
+		                window.location.href = event.target.getAttribute("href");
+		            }
+		        });
+		    });
+		</script>
 
 </html>

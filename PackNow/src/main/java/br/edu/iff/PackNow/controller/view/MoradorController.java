@@ -22,12 +22,12 @@ import br.edu.iff.PackNow.service.MoradorService;
 @Controller
 @RequestMapping("morador")
 public class MoradorController {
-	
+	@Autowired
 	public MoradorService moradorServ;
-
+	@Autowired
 	public EnderecoService enderecoServ;
 	
-	   @Autowired
+
 	    public MoradorController(MoradorService moradorService, EnderecoService enderecoService) {
 	        this.moradorServ = moradorService;
 	        this.enderecoServ = enderecoService;

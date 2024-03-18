@@ -30,6 +30,10 @@ public class Encomenda implements Serializable  {
 	private Funcionario funcionarioEntrada;
 	
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name="funcionario_saida_id" )
+	private Funcionario funcionarioSaida;
+	
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name="endereco_id")
 	private Endereco enderecoEntrega;
 	
@@ -165,6 +169,12 @@ public class Encomenda implements Serializable  {
 	}
 	public void setDataSaida(String dataSaida) {
 		this.dataSaida = dataSaida;
+	}
+	public Funcionario getFuncionarioSaida() {
+		return funcionarioSaida;
+	}
+	public void setFuncionarioSaida(Funcionario funcionarioSaida) {
+		this.funcionarioSaida = funcionarioSaida;
 	}
 
 	

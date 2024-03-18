@@ -40,6 +40,7 @@ public class EncomendaService {
 			throw new IllegalArgumentException("Endereço com o id "+ enderecoId + " não foi encontrada.");
 		}
 		Encomenda e = new Encomenda(FuncionarioRep.buscarPeloId(funcionarioId), EnderecoRep.buscarPeloId(enderecoId), nomeEntregador,telefoneEntregador);
+		System.out.println("!!!!");
 		EncomendaRep.save(e);
 		return "Encomenda registrada no id " + e.getId();
 	}
@@ -95,14 +96,16 @@ public class EncomendaService {
 			return "Encomenda com o id "+e.getId() + " foi atualizada.";
 		}
 	}
-
-	public String registrarSaida(Long id, Long idMorador) {
-		Morador m = MoradorRep.buscarPeloId(idMorador);
+	@Transactional
+	public String registrarSaida(Long id,  Long funcionarioId, Long moradorId) {
+		Morador m = MoradorRep.buscarPeloId(moradorId);
+		Funcionario f = FuncionarioRep.buscarPeloId(funcionarioId);
 		Encomenda e = EncomendaRep.buscarPeloId(id);
 		if(e==null) {
 			return "Encomenda não encontrada.";
 		}else {
 			if(m!=null) {
+				e.setFuncionarioSaida(f);
 				e.setMoradorRetirada(m);
 				e.setDataSaida(e.obterHoraEmFormatoString());
 				EncomendaRep.save(e);
