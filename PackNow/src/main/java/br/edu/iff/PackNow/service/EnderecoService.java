@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.edu.iff.PackNow.model.Endereco;
 
 import br.edu.iff.PackNow.repository.EnderecoRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class EnderecoService {
@@ -22,10 +23,13 @@ public class EnderecoService {
 		}else {
 			Endereco e = EnderecoRep.save(endereco);
 			EnderecoRep.flush();
+			
+
+			
 			return "Endereço registrado no id " + e.getId();
 		}
 	}
-
+	@Transactional
 	public String atualizarEndereco(Long id, String numero, String bloco) {
 		Endereco e = EnderecoRep.buscarPeloId(id);
 		if(e == null) {
@@ -36,12 +40,13 @@ public class EnderecoService {
 			}
 			e.setNumero(numero);
 			e.setBloco(bloco);
-			EnderecoRep.save(e);
+			
+			EnderecoRep.flush();
 			return "Informações do endereço com id "+e.getId()+ " foram atualizadas";
 		}
 	}
 
-	public String deletarEntedereco(Long id) {
+	public String deletarEndereco(Long id) {
 		Endereco e = EnderecoRep.buscarPeloId(id);
 		if(e!=null) {	
 			EnderecoRep.delete(e);
@@ -57,7 +62,7 @@ public class EnderecoService {
 		return EnderecoRep.buscarPeloId(id);
 	}
 	
-	public Object getEnderecoByNumeroEBloco(String numero, String bloco) {
+	public Endereco getEnderecoByNumeroEBloco(String numero, String bloco) {
 		if(EnderecoRep.buscarPeloNumeroEBloco(numero, bloco)== null) {
 			throw new IllegalArgumentException("Endereço com o número "+ numero +" e bloco " + bloco +" não foi encontrado.");
 		}
@@ -74,4 +79,23 @@ public class EnderecoService {
 		return EnderecoRep.listarNumerosDoBloco(bloco);
 	}
 
+	public void atualizarEndereco(Endereco endereco) {/*		
+	Endereco e = EnderecoRep.buscarPeloNumeroEBloco(numero, bloco);
+	    if (e != null) {
+	        if (bloco != null) {
+	            e.setBloco(bloco);
+	        }
+	        if (numero != null) {
+	            e.setNumero(numero);
+	        }
+	        EnderecoRep.save(e);
+	        EnderecoRep.flush();
+	        return "Endereço com Id " + e.getId() + " foi atualizado.";
+	    } 
+	    else {
+	        return "Endereço não encontrado para os parâmetros fornecidos.";
+	    }*/
+		EnderecoRep.save(endereco);
+
+	}
 }

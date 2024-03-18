@@ -53,11 +53,11 @@
           <td th:text="${morador.nome}"></td>
           <td th:text="${morador.cpf}"></td>
           <td th:text="${morador.telefone}"></td>
-          <td th:text=" 'Bloco: ' + ${morador.endereco.bloco +' Número: '+  morador.endereco.numero}"></td>
+          <td th:text=" 'Bloco ' + ${morador.endereco.bloco +' Número '+  morador.endereco.numero}"></td>
           <td>
             <!-- Botões de editar e deletar -->
             <button class="btn btn-primary">Editar</button>
-            <button class="btn btn-danger">Deletar</button>
+            <a th:href="@{/morador/delete/{cpf}(cpf=${morador.cpf})}" class="btn btn-danger">Deletar</a>
           </td>
         </tr>
         

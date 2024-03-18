@@ -48,7 +48,7 @@ public class EnderecoRestController {
 		if(eBusca==null) {			
 			return "Endereço não encontrado";
 		}else {
-			return EnderecoServ.deletarEntedereco(id);
+			return EnderecoServ.deletarEndereco(id);
 		}
 	}
 	

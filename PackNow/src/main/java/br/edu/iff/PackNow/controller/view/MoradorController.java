@@ -5,8 +5,10 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,35 +22,39 @@ import br.edu.iff.PackNow.service.MoradorService;
 @Controller
 @RequestMapping("morador")
 public class MoradorController {
-	@Autowired
+	
 	public MoradorService moradorServ;
-	@Autowired
+
 	public EnderecoService enderecoServ;
 	
-	@GetMapping("/adicionar")
-	public String addMoradorForm(Model model){
-		model.addAttribute("morador", new Morador());
-		model.addAttribute("endereco_lista", enderecoServ.listarEnderecos());
-		model.addAttribute("bloco_lista", enderecoServ.listarBlocos());
-		return "morador/adicionar-morador";
-	}
-    // Método para ajudar na exibição dos blocos
-    @GetMapping("/buscarNumerosDoBloco")
-    @ResponseBody
-    public Set<String> buscarNumerosDoBloco(@RequestParam("bloco") String bloco) {
-        return enderecoServ.listarNumerosDoBloco(bloco);
-    }
-	@PostMapping("/registrar")
-	public String addMorador(@ModelAttribute Morador newMorador, Model model) {
-		moradorServ.addMorador(newMorador);
-		System.out.println("Adicionado: " + newMorador.getId());
-		model.addAttribute("morador", new Morador());
-		model.addAttribute("message", "Morador adicionado com sucesso.<br>Nome " + newMorador.getNome() +"<br>CPF: " + newMorador.getCpf()+ "<br>Endereço - Bloco " + newMorador.getEndereco().getBloco() + " Número " + newMorador.getEndereco().getNumero()); 
-		return "success";
-	}
+	   @Autowired
+	    public MoradorController(MoradorService moradorService, EnderecoService enderecoService) {
+	        this.moradorServ = moradorService;
+	        this.enderecoServ = enderecoService;
+	    }
+	   @GetMapping("/adicionar")
+	    public String mostrarFormulario(Model model) {
+	        model.addAttribute("morador", new Morador());
+	        model.addAttribute("enderecos", enderecoServ.listarEnderecos()); // Carrega os endereços existentes
+	        return "morador/adicionar-morador";
+	    }
+	    @PostMapping("/registrar")
+	    public String salvarMorador(@ModelAttribute("morador") Morador morador, @RequestParam("enderecoId") Long enderecoId, BindingResult result, Model model) {
+	        Endereco endereco = enderecoServ.getEnderecoById(enderecoId);
+	        morador.setEndereco(endereco); // Associando o endereço existente ao morador
+	        moradorServ.addMorador(morador);
+	        model.addAttribute("message", "Morador registrado com sucesso.");
+	        return "success";
+	    }
 	@GetMapping("/listar")
 	public String listarMoradores(Model model) {
 		model.addAttribute("morador_lista", moradorServ.listarMoradores());
 		return "morador/visualizar-moradores";
+	}
+	@GetMapping("/delete/{cpf}")
+	public String deleteEndereco(@PathVariable("cpf") String cpf, Model model) {
+	    moradorServ.deletarMoradorCPF(cpf);
+	    model.addAttribute("message", "Morador deletado com sucesso.");
+	    return "success";
 	}
 }

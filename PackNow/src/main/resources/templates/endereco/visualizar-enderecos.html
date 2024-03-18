@@ -52,8 +52,8 @@
           <td th:text="${endereco.numero}"></td>
           <td style="text-align: center;">
             <!-- Botões de editar e deletar -->
-            <button class="btn btn-primary">Editar</button>
-            <button class="btn btn-danger">Deletar</button>
+            <a th:href="@{/endereco/edit/{id}(id=${endereco.id})}" class="btn btn-primary">Editar</a>
+            <a th:href="@{/endereco/delete/{id}(id=${endereco.id})}" class="btn btn-danger">Deletar</a>
           </td>
       </tbody>
     </table>
