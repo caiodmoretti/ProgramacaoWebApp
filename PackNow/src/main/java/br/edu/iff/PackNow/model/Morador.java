@@ -40,5 +40,6 @@ public class Morador extends Pessoa {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+	
 
 }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Visualizar moradores</title>
+	<div th:replace="~{head :: frag_head}"></div>
+			<!-- Adicionando o jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body >
+	<div th:replace="~{layoutBase :: frag_body}"></div>
+	<header >
+		<div th:insert:"~{header :: frag_header}"></div>
+
+	</header>
+	    <!-- Conteúdo da página -->
+<main>
+ <div class="container">
+		<div  class="row">
+				<div class="col-md-4">
+				  	<h1><b>Lista de moradores</b></h1>
+				</div>
+  				<div class="col-md-4 offset-md-4">
+				</div>		
+		</div>
+    <table id="moradoresTable" class="table table-striped">
+			<!-- Barra de pesquisa -->
+			<div  class="row">
+			<div class="col-md-4"></div>
+  				<div class="col-md-4 offset-md-4">
+					<div class="d-flex align-items-center">
+				        <i class="fas fa-search" style="font-size: 25px; margin-right: 8px; padding-bottom: 10px;"></i>
+				        <input type="text" id="searchInput" class="form-control mb-3" style="width: 350px;" placeholder="Entre com um termo para pesquisar na lista...">
+				    </div>
+			</div>		
+		</div>
+      <thead class="thead-dark">
+        <tr>
+          <th>Id</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Telefone</th>
+          <th>Endereço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- tabela com os dados dos moradores -->
+        <tr th:each="morador: ${morador_lista}">
+          <td th:text="${morador.id}"></td>
+          <td th:text="${morador.nome}"></td>
+          <td th:text="${morador.cpf}"></td>
+          <td th:text="${morador.telefone}"></td>
+          <td th:text=" 'Bloco: ' + ${morador.endereco.bloco +' Número: '+  morador.endereco.numero}"></td>
+          <td>
+            <!-- Botões de editar e deletar -->
+            <button class="btn btn-primary">Editar</button>
+            <button class="btn btn-danger">Deletar</button>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>							
+		</main>
+		<div th:insert="~{footer :: frag_footer}"></div>
+	
+</body>
+	<!-- Adicionando o Bootstrap JavaScript -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	<script>
+	  $(document).ready(function(){
+	    // Adicionando funcionalidade de pesquisa
+	    $('#searchInput').on('keyup', function(){
+	      var searchText = $(this).val().toLowerCase();
+	      $('#moradoresTable tbody tr').each(function(){
+	        var rowData = $(this).text().toLowerCase();
+	        if(rowData.indexOf(searchText) == -1){
+	          $(this).hide();
+	        } else {
+	          $(this).show();
+	        }
+	      });
+	    });
+	  });
+	</script>
+
+</html>

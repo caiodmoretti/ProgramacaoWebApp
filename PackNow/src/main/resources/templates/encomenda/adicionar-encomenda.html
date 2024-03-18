@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Adicionar encomenda</title>
+    <div th:replace="~{head :: frag_head}"></div>
+</head>
+
+<body>
+    <div th:replace="~{layoutBase :: frag_body}"></div>
+    <header>
+        <div th:insert="~{header :: frag_header}"></div>
+    </header>
+    <!-- Conteúdo da página -->
+    <main>
+        <div class="container">
+            <h1>Entre com as informações de entrada da encomenda</h1>
+            <form>
+  				<div class="btn-group" style="padding-top: 10px;">
+                    <button class="btn btn-primary dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false">
+                        Selecione um funcionário responsável pela entrega
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Funcionário 1</a>
+                        <a class="dropdown-item" href="#">Funcionário 2</a>
+                        <a class="dropdown-item" href="#">Funcionário 3</a>
+                    </div>
+                </div>
+                <br>
+   				<div class="btn-group" style="padding-top: 10px;">
+                    <button class="btn btn-primary dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false">
+                        Selecione um endereço de entrega
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Endereço 1</a>
+                        <a class="dropdown-item" href="#">Endereço 2</a>
+                        <a class="dropdown-item" href="#">Endereço 3</a>
+                    </div>
+                </div>
+
+            </form>
+            <div style="padding-top: 10px;">
+				<button type="submit" class="btn btn-primary">Adicionar</button>
+                <a  href="#" class="btn btn-secondary">Voltar</a>
+			</div>
+        </div>
+    </main>
+    <div th:insert="~{footer :: frag_footer}"></div>
+</body>
+
+</html>

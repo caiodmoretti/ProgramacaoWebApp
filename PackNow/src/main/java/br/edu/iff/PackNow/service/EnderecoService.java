@@ -1,6 +1,7 @@
 package br.edu.iff.PackNow.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,13 @@ public class EnderecoService {
 	}
 	public List<Endereco> listarEnderecos() {
 		return EnderecoRep.findAll();
+	}
+	
+	public Set<String> listarBlocos(){
+		return EnderecoRep.listarBlocos();
+	}
+	public Set<String> listarNumerosDoBloco(String bloco){
+		return EnderecoRep.listarNumerosDoBloco(bloco);
 	}
 
 }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Adicionar morador</title>
+    <div th:replace="~{head :: frag_head}"></div>
+</head>
+
+<body>
+    <div th:replace="~{layoutBase :: frag_body}"></div>
+    <header>
+        <div th:insert="~{header :: frag_header}"></div>
+    </header>
+    <!-- Conteúdo da página -->
+    <main>
+        <div class="container">
+            <h1>Entre com as informações do morador</h1>
+            <form action="#" th:action ="@{registrar}" th:object="${morador}" method="post">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" class="form-control " id="nome" th:field="*{nome}">
+                </div>
+                <div class="form-group">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" class="form-control" id="cpf" th:field="*{cpf}">
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" class="form-control" id="telefone" th:field="*{telefone}">
+                </div>
+            <div class="form-group">
+                <label for="endereco"><b>Endereço</b></label>
+                <div class="btn-group" style="padding-top: 10px;">
+                    <select class="form-control"  id="bloco" th:field="*{endereco.bloco}">
+                        <option value="">Selecione um bloco</option>
+                        <option th:each="bloco : ${bloco_lista}" th:value="${bloco}" th:text="${bloco}"></option>
+                    </select>
+                </div>
+                <div class="form-group" style="padding-top: 10px;">
+                    <label for="numero">Informe o número do endereço:</label>
+                    <input type="text" class="form-control" id="numero" th:field="*{endereco.numero}">
+                </div>
+            </div>
+	            <div style="padding-top: 10px;">
+					<input class="btn btn-primary" type="submit" value="Adicionar">
+	                <a  href="#" class="btn btn-secondary">Voltar</a>
+				</div>
+            </form>
+            <br>
+
+
+        </div>
+    </main>
+    <div th:insert="~{footer :: frag_footer}"></div>
+
+</script>
+
+</body>
+
+</html>
