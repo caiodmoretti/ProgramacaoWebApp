@@ -52,9 +52,32 @@ public class MoradorController {
 		return "morador/visualizar-moradores";
 	}
 	@GetMapping("/delete/{cpf}")
-	public String deleteEndereco(@PathVariable("cpf") String cpf, Model model) {
-	    moradorServ.deletarMoradorCPF(cpf);
-	    model.addAttribute("message", "Morador deletado com sucesso.");
-	    return "success";
+	public String deleteMorador(@PathVariable("cpf") String cpf, Model model) {
+		try {	    
+			moradorServ.deletarMoradorCPF(cpf);
+		    model.addAttribute("message", "Morador deletado com sucesso.");
+		    return "success";
+				
+		} catch (Exception e) {
+		    model.addAttribute("message", "Não foi possível deletar o morador.");
+		    return "error";
+		}
+
+	}
+	@GetMapping("/edit/{id}")
+	public String showUpdateMoradorForm(@PathVariable("id") Long id, Model model) {
+	    Morador morador = moradorServ.getMoradorById(id);
+	    model.addAttribute("morador", morador);
+        model.addAttribute("enderecos", enderecoServ.listarEnderecos());
+	    return "morador/editar-morador";
+	}
+	@PostMapping("/update/{id}")
+	public String updateMorador(@PathVariable("id") Long id, Morador morador, Endereco endereco, Model model) {
+		String cpf = morador.getCpf();
+		String nome = morador.getNome();
+		String telefone = morador.getTelefone();
+		moradorServ.atualizarDadosMorador(id, cpf, nome, telefone, endereco);
+		model.addAttribute("message", "Endereço atualizado com sucesso.<br>Bloco: " + endereco.getBloco() +"<br>Número: " + endereco.getNumero());
+		return "success";
 	}
 }

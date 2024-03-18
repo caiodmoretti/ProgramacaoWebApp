@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Visualizar moradores</title>
+    <title>Visualizar funcionários</title>
 	<div th:replace="~{head :: frag_head}"></div>
 			<!-- Adicionando o jQuery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -20,7 +20,7 @@
  <div class="container">
 		<div  class="row">
 				<div class="col-md-4">
-				  	<h1><b>Lista de moradores</b></h1>
+				  	<h1><b>Lista de funcionários</b></h1>
 				</div>
   				<div class="col-md-4 offset-md-4">
 				</div>		
@@ -42,22 +42,22 @@
           <th>Nome</th>
           <th>CPF</th>
           <th>Telefone</th>
-          <th>Endereço</th>
+          <th>Cargo</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
         <!-- tabela com os dados dos moradores -->
-        <tr th:each="morador: ${morador_lista}">
-          <td th:text="${morador.id}"></td>
-          <td th:text="${morador.nome}"></td>
-          <td th:text="${morador.cpf}"></td>
-          <td th:text="${morador.telefone}"></td>
-          <td th:text=" 'Bloco ' + ${morador.endereco.bloco +' Número '+  morador.endereco.numero}"></td>
+        <tr th:each="funcionario: ${funcionario_lista}">
+          <td th:text="${funcionario.id}"></td>
+          <td th:text="${funcionario.nome}"></td>
+          <td th:text="${funcionario.cpf}"></td>
+          <td th:text="${funcionario.telefone}"></td>
+          <td th:text="${funcionario.cargo}"></td>
           <td>
             <!-- Botões de editar e deletar -->
-            <a th:href="@{/morador/edit/{id}(id=${morador.id})}" class="btn btn-primary">Editar</button>
-            <a id="deleteButton" th:href="@{/morador/delete/{cpf}(cpf=${morador.cpf})}" class="btn btn-danger">Deletar</a>
+          <a th:href="@{/funcionario/edit/{id}(id=${funcionario.id})}" class="btn btn-primary">Editar</button>
+ 		  <a id="deleteButton" th:href="@{/funcionario/delete/{cpf}(cpf=${funcionario.cpf})}" class="btn btn-danger">Deletar</a>
           </td>
         </tr>
         
@@ -92,7 +92,7 @@
 	        event.preventDefault(); // Evita que o link seja seguido imediatamente
 	
 	        // Mostra o pop-up de confirmação
-	        var confirmDelete = confirm("Você tem certeza que quer deletar esse morador?");
+	        var confirmDelete = confirm("Você tem certeza que quer deletar esse funcionário?");
 	
 	        // Se o usuário confirmar, segue com a deleção
 	        if (confirmDelete) {

@@ -58,7 +58,7 @@ public class MoradorService {
 			return "Morador do id " + m.getId() +" foi adicionado no endereço.";
 	}
     @Transactional
-    public String atualizarDadosMorador(Long id, String nome, String telefone, String cpf) {
+    public String atualizarDadosMorador(Long id, String nome, String telefone, String cpf, Endereco e) {
 		Morador m = MoradorRep.buscarPeloId(id);
 		if(m==null) {
 			return "Morador não encontrado";
@@ -71,8 +71,9 @@ public class MoradorService {
 			}
 			if(cpf!=null) {
 				m.setCpf(cpf);
-			}	
-			MoradorRep.save(m);
+			}
+			m.adicionarMoradorNoEndereco(e);
+			MoradorRep.flush();
 		return "Dados do morador com id " + m.getId() +" foram atualizado.";
 		}
     }

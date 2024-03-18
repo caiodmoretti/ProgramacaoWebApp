@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.iff.PackNow.model.Funcionario;
 import br.edu.iff.PackNow.repository.FuncionarioRepository;
+import jakarta.transaction.Transactional;
 @Service
 public class FuncionarioService {
 
@@ -49,7 +50,7 @@ public class FuncionarioService {
 	public List<Funcionario> listarFuncionarios() {
 		return FuncionarioRep.findAll();
 	}
-
+	@Transactional
 	public String atualizarFuncionario(Long id, String nome, String telefone, String cpf, String cargo) {
 		Funcionario f = FuncionarioRep.buscarPeloId(id);
 		if(f==null) {
@@ -67,7 +68,7 @@ public class FuncionarioService {
 			if(cargo!=null) {				
 				f.setCargo(cargo);
 			}
-			FuncionarioRep.save(f);
+			FuncionarioRep.flush();
 			return "Funcionário com o id "+f.getId()+ " foi atualizado.";
 		}
 	}

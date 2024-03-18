@@ -33,7 +33,7 @@ public class EnderecoController {
 		System.out.println("Adicionado: " + newEndereco.getId());
 		model.addAttribute("endereco", new Endereco());
 		model.addAttribute("message", "Endereço adicionado com sucesso.<br>Bloco: " + newEndereco.getBloco() +"<br>Número: " + newEndereco.getNumero());
-		return "endereco/adicionar-endereco";
+		return "success";
 	}
 	@GetMapping("/listar")
 	public String listarEnderecos(Model model) {
@@ -56,27 +56,16 @@ public class EnderecoController {
 	}
 	@GetMapping("/delete/{id}")
 	public String deleteEndereco(@PathVariable("id") Long id, Model model) {
-	    enderecoServ.deletarEndereco(id);
-	    model.addAttribute("message", "Endereço deletado com sucesso.");
-	    return "success";
+		try {
+			enderecoServ.deletarEndereco(id);
+		    model.addAttribute("message", "Endereço deletado com sucesso.");
+		    return "success";
+				
+		} catch (Exception e) {
+		    model.addAttribute("message", "Não foi possível deletar o endereço.");
+		    return "error";			
+		}
+
 	}
 
-	
-	
-	/*
-	@GetMapping("/editar/{id}")
-	public String editarEnderecoForm(@PathVariable Long id, Model model) {
-	    Endereco endereco = endereceoServ.getEnderecoById(id);
-	    model.addAttribute("endereco_edit", endereco);
-	    return "endereco/editar-endereco";
-	}
-
-	@PostMapping("/atualizar")
-	public String editarEndereco(@ModelAttribute Endereco endereco, Model model) {
-	    String bloco = endereco.getBloco();
-	    String numero = endereco.getNumero();
-	    endereceoServ.atualizarEndereco(bloco, numero);
-	    model.addAttribute("message", "Endereço atualizado com sucesso.<br>Bloco: " + endereco.getBloco() +"<br>Número: " + endereco.getNumero());
-	    return "success";
-	}*/
 }

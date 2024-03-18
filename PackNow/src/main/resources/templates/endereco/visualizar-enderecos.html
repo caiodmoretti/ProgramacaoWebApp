@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Title da pagina1</title>
+    <title>Visualizar endereços</title>
 	<div th:replace="~{head :: frag_head}"></div>
 				<!-- Adicionando o jQuery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -53,7 +53,7 @@
           <td style="text-align: center;">
             <!-- Botões de editar e deletar -->
             <a th:href="@{/endereco/edit/{id}(id=${endereco.id})}" class="btn btn-primary">Editar</a>
-            <a th:href="@{/endereco/delete/{id}(id=${endereco.id})}" class="btn btn-danger">Deletar</a>
+            <a id="deleteButton" th:href="@{/endereco/delete/{id}(id=${endereco.id})}" class="btn btn-danger">Deletar</a>
           </td>
       </tbody>
     </table>
@@ -81,5 +81,18 @@
 	    });
 	  });
 	</script>
+	<script>
+    document.getElementById("deleteButton").addEventListener("click", function(event) {
+        event.preventDefault(); // Evita que o link seja seguido imediatamente
+
+        // Mostra o pop-up de confirmação
+        var confirmDelete = confirm("Você tem certeza que quer deletar esse endereço?");
+
+        // Se o usuário confirmar, segue com a deleção
+        if (confirmDelete) {
+            window.location.href = event.target.getAttribute("href");
+        }
+    });
+</script>
 
 </html>
