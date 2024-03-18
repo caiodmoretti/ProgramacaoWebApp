@@ -33,12 +33,12 @@ public class MoradorRestController {
 	@PutMapping("/{id}")
 	@ResponseBody
 	@Operation(summary = "Atualizar um morador")
-	public String atualizarMorador(@PathVariable("id") Long id, String nome, String telefone, String cpf) throws Exception{
+	public String atualizarMorador(@PathVariable("id") Long id, String nome, String telefone, String cpf, Endereco endereco) throws Exception{
 		Morador mBusca = MoradorServ.getMoradorById(id);
 		if(mBusca == null) {
 			return "Morador não encontrado.";
 		} else {
-			return MoradorServ.atualizarDadosMorador(id, nome, telefone, cpf);
+			return MoradorServ.atualizarDadosMorador(id, nome, telefone, cpf, endereco);
 		}
 	}
 	@PutMapping("/{id}/adicionar-morador-endereco")

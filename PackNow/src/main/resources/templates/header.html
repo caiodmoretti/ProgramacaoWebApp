@@ -79,9 +79,10 @@
 					  <div class="input-group-prepend ">
 					    <button class="btn btn-outline-laranja dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false"> <i class="fas fa-search "style="margin-right: 8px;"></i>Consultar</button>
 					    <div class="dropdown-menu">
-						<a class="dropdown-item" th:href="@{/visualizar-encomendas}">Encomenda</a>
+						<a class="dropdown-item" th:href="@{/encomenda/listar}">Encomenda</a>
 					      <a class="dropdown-item" th:href="@{/morador/listar}">Morador</a>
 					      <a class="dropdown-item" th:href="@{/endereco/listar}">Endereço</a>
+					      <a class="dropdown-item" th:href="@{/funcionario/listar}">Funcionário</a>
 					  </div>
 					</div>
 				  </li>
@@ -90,9 +91,10 @@
 					  <div class="input-group-prepend ">
 					    <button class="btn btn-outline-laranja dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false"> <i class="fas fa-plus " style="margin-right: 4px;"></i> Adicionar</button>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" th:href="@{/adicionar-encomenda}">Encomenda</a>
+					      <a class="dropdown-item" th:href="@{/encomenda/adicionar}">Encomenda</a>
 					      <a class="dropdown-item" th:href="@{/morador/adicionar}">Morador</a>
 					      <a class="dropdown-item" th:href="@{/endereco/adicionar}">Endereço</a>
+					      <a class="dropdown-item" th:href="@{/funcionario/adicionar}">Funcionário</a>
 					  </div>
 					</div>
 				  </li>

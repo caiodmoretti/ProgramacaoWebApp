@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Visualizar endereços</title>
+    <title>Visualizar funcionários</title>
 	<div th:replace="~{head :: frag_head}"></div>
-				<!-- Adicionando o jQuery -->
+			<!-- Adicionando o jQuery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
@@ -18,16 +18,16 @@
 	    <!-- Conteúdo da página -->
 <main>
  <div class="container">
-	 	  <!-- Barra de pesquisa -->
 		<div  class="row">
 				<div class="col-md-4">
-				  	<h1><b>Lista de endereços</b></h1>
+				  	<h1><b>Lista de funcionários</b></h1>
 				</div>
   				<div class="col-md-4 offset-md-4">
 				</div>		
 		</div>
-    <table id="enderecosTable" class="table table-striped">
-		<div  class="row">
+    <table id="moradoresTable" class="table table-striped">
+			<!-- Barra de pesquisa -->
+			<div  class="row">
 			<div class="col-md-4"></div>
   				<div class="col-md-4 offset-md-4">
 					<div class="d-flex align-items-center">
@@ -39,22 +39,28 @@
       <thead class="thead-dark">
         <tr>
           <th>Id</th>
-          <th>Bloco</th>
-          <th>Número</th>
-          <th style="text-align: center;">Ações</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Telefone</th>
+          <th>Cargo</th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>
-        <!-- tabela com os dados dos endereços -->
-        <tr th:each="endereco: ${endereco_lista}">
-          <td th:text="${endereco.id}"></td>
-          <td th:text="${endereco.bloco}"></td>
-          <td th:text="${endereco.numero}"></td>
-          <td style="text-align: center;">
+        <!-- tabela com os dados dos moradores -->
+        <tr th:each="funcionario: ${funcionario_lista}">
+          <td th:text="${funcionario.id}"></td>
+          <td th:text="${funcionario.nome}"></td>
+          <td th:text="${funcionario.cpf}"></td>
+          <td th:text="${funcionario.telefone}"></td>
+          <td th:text="${funcionario.cargo}"></td>
+          <td>
             <!-- Botões de editar e deletar -->
-            <a th:href="@{/endereco/edit/{id}(id=${endereco.id})}" class="btn btn-primary">Editar</a>
-			<a href="#" class="btn btn-danger deleteButton" th:href="@{/endereco/delete/{id}(id=${endereco.id})}">Deletar</a>
+          <a th:href="@{/funcionario/edit/{id}(id=${funcionario.id})}" class="btn btn-primary">Editar</button>
+		<a href="#" class="btn btn-danger deleteButton" th:href="@{/funcionario/delete/{id}(id=${encomenda.id})}">Deletar</a>
           </td>
+        </tr>
+        
       </tbody>
     </table>
   </div>							
@@ -70,7 +76,7 @@
 	    // Adicionando funcionalidade de pesquisa
 	    $('#searchInput').on('keyup', function(){
 	      var searchText = $(this).val().toLowerCase();
-	      $('#enderecosTable tbody tr').each(function(){
+	      $('#moradoresTable tbody tr').each(function(){
 	        var rowData = $(this).text().toLowerCase();
 	        if(rowData.indexOf(searchText) == -1){
 	          $(this).hide();
@@ -91,7 +97,7 @@
 		            event.preventDefault(); // Evita que o link seja seguido imediatamente
 		
 		            // Mostra o pop-up de confirmação
-		            var confirmDelete = confirm("Você tem certeza que quer deletar esse endereço?");
+		            var confirmDelete = confirm("Você tem certeza que quer deletar esse funcionário?");
 		
 		            // Se o usuário confirmar, segue com a deleção
 		            if (confirmDelete) {
@@ -100,5 +106,6 @@
 		        });
 		    });
 		</script>
+
 
 </html>

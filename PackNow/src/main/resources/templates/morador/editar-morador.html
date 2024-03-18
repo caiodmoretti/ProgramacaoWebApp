@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Adicionar morador</title>
+    <title>Editar morador</title>
     <div th:replace="~{head :: frag_head}"></div>
 </head>
 
@@ -14,21 +14,21 @@
     <!-- Conteúdo da página -->
     <main>
 	 <div class="container">
-	    <h1>Entre com as informações do morador</h1>
+	    <h1>Faça a edição das informações do morador</h1>
 	    <h3>Morador</h3>
-	    <form th:action="@{/morador/registrar}" th:object="${morador}" method="post">
+	    <form th:action="@{/morador/update/{id}(id=${morador.id})}" th:object="${morador}" method="post">
 	        <label for="nome">Nome:</label>
-	        <input type="text" class="form-control" style="width: 350px; border-color: black" id="nome" name="nome"><br>
+	        <input type="text" class="form-control" style="width: 350px; border-color: black" th:field="*{nome}" id="nome" name="nome"><br>
 	        <label for="cpf">CPF:</label>
-	        <input type="text" class="form-control" style="width: 350px; border-color: black" id="cpf" name="cpf"><br>
+	        <input type="text" class="form-control" style="width: 350px; border-color: black" th:field="*{cpf}" id="cpf" name="cpf"><br>
 	        <label for="telefone">Telefone:</label>
-	        <input type="text" class="form-control" style="width: 350px; border-color: black"  id="telefone" name="telefone"><br>
+	        <input type="text" class="form-control" style="width: 350px; border-color: black" th:field="*{telefone}" id="telefone" name="telefone"><br>
 	
 	        
 			<label for="enderecoId"><h3>Selecione o Endereço:</h3></label>
 
 			<div class="dropdown">
-			    <select class="btn btn-primary" style=" width: 250px;" id="enderecoId" name="enderecoId" data-toggle="dropdown">
+			    <select class="btn btn-primary" style=" width: 250px;" id="endereco" name="endereco" data-toggle="dropdown">
 			        <option value="" selected>Escolha o endereço</option>
 			        <option th:each="endereco : ${enderecos}" th:value="${endereco.id}" th:text="${'Bloco ' + endereco.bloco + ' - Número ' + endereco.numero}"></option>
 			    </select>
@@ -36,7 +36,7 @@
 
 
 	    <br>	
-	        <input  class="btn btn-primary" type="submit" value="Adicionar">
+	        <input  class="btn btn-primary" type="submit" value="Atualizar">
 	       	<a  href="#" class="btn btn-secondary">Voltar</a>
 	    </form>
 	    <br>

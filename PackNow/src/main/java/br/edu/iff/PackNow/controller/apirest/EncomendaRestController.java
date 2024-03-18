@@ -75,12 +75,12 @@ public class EncomendaRestController {
 	@PutMapping("/{id}/saida")
 	@ResponseBody
 	@Operation(summary = "Registrar saida de uma encomenda")
-	public String registrarSaidaEncomenda(@PathVariable("id")Long id, Long idMorador) throws Exception{
+	public String registrarSaidaEncomenda(@PathVariable("id")Long id, Long idFuncionario, Long idMorador) throws Exception{
 		Encomenda eBusca = EncomendaServ.getEncomendaById(id);
 		if(eBusca == null) {
 			return "Encomenda não encontrada.";
 		} else {
-			return EncomendaServ.registrarSaida(id, idMorador);
+			return EncomendaServ.registrarSaida(id,  idFuncionario, idMorador);
 		}
 	}
 }

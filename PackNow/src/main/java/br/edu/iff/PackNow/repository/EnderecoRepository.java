@@ -13,6 +13,7 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 	
 	@Query("SELECT e FROM Endereco e WHERE e.numero = :numero AND e.bloco = :bloco")
 	Endereco buscarPeloNumeroEBloco(@Param("numero") String numero, @Param("bloco") String bloco);
+	
 	@Query("SELECT e FROM Endereco e WHERE e.id = :id")
 	Endereco buscarPeloId(@Param("id") Long id);
 	

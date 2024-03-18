@@ -15,25 +15,30 @@
     <main>
         <div class="container">
             <h1>Entre com as informações de saída da encomenda</h1>
-            <form>
-                <p><b>Funcionário reponsável pela entrada: </b> John Lenon </p>
-				<p><b>Endereço de entrega: </b> Bloco 1, 101 </p>
-   				<div class="btn-group" >
-                    <button class="btn btn-primary dropdown-toggle text-light font-weight-bold" type="button" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false">
-                        Selecione um morador para retirada
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Morador 1</a>
-                        <a class="dropdown-item" href="#">Morador 2</a>
-                        <a class="dropdown-item" href="#">Morador 3</a>
-                    </div>
-                </div>
+			<form th:action="@{/encomenda/registrarSaida/{id}(id=${encomenda.id})}" th:object="${encomenda}" method="post">
 
-            </form>
-            <div style="padding-top: 10px;">
-				<button type="submit" class="btn btn-success">Registra saída</button>
-                <a  href="#" class="btn btn-secondary">Voltar</a>
+			<label for="funcionarioId"><h3>Selecione o Funcionário que liberou a encomenda</h3></label>
+			<div class="dropdown">
+			    <select class="btn btn-primary" style=" width: 300px;" id="funcionarioId" name="funcionarioId" data-toggle="dropdown">
+			        <option value="" selected>Escolha o funcionário de saída</option>
+			        <option th:each="funcionario : ${funcionarios}" th:value="${funcionario.id}" th:text="${funcionario.nome + ' - ' +funcionario.cargo }"></option>
+			    </select>
 			</div>
+                <br>
+                <label for="enderecoId"><h3>Selecione o morador que retirou a encomenda</h3></label>
+				<div class="dropdown">
+				    <select class="btn btn-primary" style=" width: 300px;" id="moradorId" name="moradorId" data-toggle="dropdown">
+				        <option value="" selected>Escolha o morador</option>
+				        <option th:each="morador : ${moradores}" th:value="${morador.id}" th:text="${'Nome ' + morador.nome+ ' - CPF ' + morador.cpf}"></option>
+				    </select>
+				</div>
+		    <br>
+			
+            <div style="padding-top: 10px;">
+	        <input  class="btn btn-success" type="submit" value="Registra saída">
+            <a  href="#" class="btn btn-secondary">Voltar</a>
+            </form>
+   
         </div>
     </main>
     <div th:insert="~{footer :: frag_footer}"></div>
