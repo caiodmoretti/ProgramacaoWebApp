@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Title da home</title>
+    <title>Erro 500</title>
 	<div th:replace="~{head :: frag_head}"></div>
 
 </head>
 
-<body  >
+<body >
 	<div th:replace="~{layoutBase :: frag_body}"></div>
 	<header >
 		<div th:insert:"~{header :: frag_header}"></div>
@@ -15,10 +15,11 @@
 	</header>
 	    <!-- Conteúdo da página -->
 		<main>
+
 		<div class="container">
-			<h1>Este é o h1 da home.</h1>
-			<p>Este é o p1 da home.</p>
-	
+			<h1>Erro interno inesperado.</h1>
+			<h3>Erro 500</h3>
+            <h4 th:utext="${message}">message</h3th>
 		</div>				
 		</main>
 		<div th:insert="~{footer :: frag_footer}"></div>

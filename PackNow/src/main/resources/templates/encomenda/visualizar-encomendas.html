@@ -40,7 +40,7 @@
 				</div>		
 			</div>
 	      <thead>
-	        <tr>
+	        <tr class="table-light">
 	          <th>Id</th>
 	          <th>Funcionário de entrada</th>
 	          <th>Endereço de entrega</th>
@@ -52,7 +52,7 @@
 	      </thead>
 	      <tbody>
 	        <!-- tabela com os dados das encomendas -->
-	        <tr th:each="encomenda: ${encomenda_lista}">
+	        <tr class="table-light" th:each="encomenda: ${encomenda_lista}">
 	          <td th:text="${encomenda.id}"></td>
 	          <td th:text="${encomenda.funcionarioEntrada.nome}"></td>
 	          

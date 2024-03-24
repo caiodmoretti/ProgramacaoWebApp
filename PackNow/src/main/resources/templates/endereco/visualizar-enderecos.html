@@ -26,7 +26,7 @@
   				<div class="col-md-4 offset-md-4">
 				</div>		
 		</div>
-    <table id="enderecosTable" class="table table-striped">
+    <table  id="enderecosTable" class="table table-striped">
 		<div  class="row">
 			<div class="col-md-4"></div>
   				<div class="col-md-4 offset-md-4">
@@ -36,8 +36,8 @@
 				    </div>
 			</div>		
 		</div>
-      <thead class="thead-dark">
-        <tr>
+      <thead >
+        <tr class="table-light">
           <th>Id</th>
           <th>Bloco</th>
           <th>Número</th>
@@ -46,7 +46,7 @@
       </thead>
       <tbody>
         <!-- tabela com os dados dos endereços -->
-        <tr th:each="endereco: ${endereco_lista}">
+        <tr class="table-light" th:each="endereco: ${endereco_lista}">
           <td th:text="${endereco.id}"></td>
           <td th:text="${endereco.bloco}"></td>
           <td th:text="${endereco.numero}"></td>

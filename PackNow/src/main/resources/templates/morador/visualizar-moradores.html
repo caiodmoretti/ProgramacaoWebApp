@@ -37,7 +37,7 @@
 			</div>		
 		</div>
       <thead class="thead-dark">
-        <tr>
+        <tr class="table-light">
           <th>Id</th>
           <th>Nome</th>
           <th>CPF</th>
@@ -48,7 +48,7 @@
       </thead>
       <tbody>
         <!-- tabela com os dados dos moradores -->
-        <tr th:each="morador: ${morador_lista}">
+        <tr class="table-light" th:each="morador: ${morador_lista}">
           <td th:text="${morador.id}"></td>
           <td th:text="${morador.nome}"></td>
           <td th:text="${morador.cpf}"></td>
