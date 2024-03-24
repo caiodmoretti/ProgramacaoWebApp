@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.iff.PackNow.model.Usuario;
-import br.edu.iff.PackNow.service.UsuarioDetailsService;
 
+/*
 @Controller
 @RequestMapping("usuario")
 public class UsuarioController {
@@ -33,4 +33,4 @@ public class UsuarioController {
     }
 }
 
-
+*/

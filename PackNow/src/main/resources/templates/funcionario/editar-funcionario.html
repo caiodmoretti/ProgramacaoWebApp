@@ -14,7 +14,8 @@
     <!-- Conteúdo da página -->
     <main>
         <div class="container">
-            <h2>Faça a edição das informações do funcionário</h2>
+            <h1> <i class="fa fa-id-badge" aria-hidden="true"></i> Faça a edição das informações do funcionário</h1>
+            <hr>
             <form action="#" th:action="@{/funcionario/update/{id}(id=${funcionario.id})}" th:object="${funcionario}" method="post" >
                 <div class="form-group">
                     <label for="bloco" >Nome:</label>
@@ -34,7 +35,7 @@
                 </div>
 	            <div style="padding-top: 10px;">
 					<input class="btn btn-primary" type="submit" value="Atualizar">
-	                <a  href="#" class="btn btn-secondary">Voltar</a>
+	                <a  th:href="@{/funcionario/listar}" class="btn btn-secondary">Cancelar</a>
 				</div>
             </form>
             <br>

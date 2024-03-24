@@ -14,7 +14,8 @@
     <!-- Conteúdo da página -->
     <main>
         <div class="container">
-            <h1>Entre com as informações de saída da encomenda</h1>
+            <h1> <i class="fa fa-archive "style="margin-right: 8px;"> </i> Entre com as informações de saída da encomenda</h1>
+            <hr>
 			<form th:action="@{/encomenda/registrarSaida/{id}(id=${encomenda.id})}" th:object="${encomenda}" method="post">
 
 			<label for="funcionarioId"><h3>Selecione o Funcionário que liberou a encomenda</h3></label>
@@ -36,7 +37,7 @@
 			
             <div style="padding-top: 10px;">
 	        <input  class="btn btn-success" type="submit" value="Registra saída">
-            <a  href="#" class="btn btn-secondary">Voltar</a>
+            <a  th:href="@{/encomenda/listar}" class="btn btn-secondary">Voltar</a>
             </form>
    
         </div>

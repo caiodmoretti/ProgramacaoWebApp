@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import br.edu.iff.PackNow.model.Endereco;
 import br.edu.iff.PackNow.service.EnderecoService;
 import io.micrometer.core.ipc.http.HttpSender.Request;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("endereco")
@@ -28,7 +29,7 @@ public class EnderecoController {
 		return "endereco/adicionar-endereco";
 	}
 	@PostMapping("/registrar")
-	public String addEndereco(@ModelAttribute Endereco newEndereco, Model model) {
+	public String addEndereco(@Valid @ModelAttribute Endereco newEndereco, Model model) {
 		enderecoServ.addEndereco(newEndereco);
 		System.out.println("Adicionado: " + newEndereco.getId());
 		model.addAttribute("endereco", new Endereco());
@@ -47,7 +48,7 @@ public class EnderecoController {
 	    return "endereco/editar-endereco";
 	}
 	@PostMapping( "/update/{id}")
-	public String updateEndereco(@PathVariable("id") Long id, Endereco endereco, Model model) {
+	public String updateEndereco(@Valid @PathVariable("id") Long id, Endereco endereco, Model model) {
 		String bloco = endereco.getBloco();
 		String numero = endereco.getNumero();
 		enderecoServ.atualizarEndereco(id, numero, bloco);

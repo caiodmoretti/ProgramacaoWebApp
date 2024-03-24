@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.iff.PackNow.model.Funcionario;
 import br.edu.iff.PackNow.service.FuncionarioService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("funcionario")
@@ -26,7 +27,7 @@ public class FuncionarioController {
 		return "funcionario/adicionar-funcionario";
 	}
 	@PostMapping("/registrar")
-	public String salvarFuncionario(@ModelAttribute Funcionario newFuncionario, Model model) {
+	public String salvarFuncionario(@Valid @ModelAttribute Funcionario newFuncionario, Model model) {
 		funcionarioServ.addFuncionario(newFuncionario);
 		System.out.println("Adicionado: " + newFuncionario.getId());
 		model.addAttribute("funcionario", new Funcionario());
@@ -45,7 +46,7 @@ public class FuncionarioController {
 		return "funcionario/editar-funcionario";
 	}
 	@PostMapping("/update/{id}")
-	public String updateFuncionario(@PathVariable("id") Long id, Funcionario funcionario, Model model) {
+	public String updateFuncionario(@Valid @PathVariable("id") Long id, Funcionario funcionario, Model model) {
 		String nome = funcionario.getNome();
 		String cpf = funcionario.getCpf();
 		String telefone = funcionario.getTelefone();

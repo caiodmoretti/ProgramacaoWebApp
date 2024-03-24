@@ -18,6 +18,7 @@ import br.edu.iff.PackNow.model.Endereco;
 import br.edu.iff.PackNow.model.Morador;
 import br.edu.iff.PackNow.service.EnderecoService;
 import br.edu.iff.PackNow.service.MoradorService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("morador")
@@ -39,7 +40,7 @@ public class MoradorController {
 	        return "morador/adicionar-morador";
 	    }
 	    @PostMapping("/registrar")
-	    public String salvarMorador(@ModelAttribute("morador") Morador morador, @RequestParam("enderecoId") Long enderecoId, BindingResult result, Model model) {
+	    public String salvarMorador(@Valid @ModelAttribute("morador") Morador morador, @RequestParam("enderecoId") Long enderecoId, BindingResult result, Model model) {
 	        Endereco endereco = enderecoServ.getEnderecoById(enderecoId);
 	        morador.setEndereco(endereco); // Associando o endereço existente ao morador
 	        moradorServ.addMorador(morador);
@@ -72,12 +73,12 @@ public class MoradorController {
 	    return "morador/editar-morador";
 	}
 	@PostMapping("/update/{id}")
-	public String updateMorador(@PathVariable("id") Long id, Morador morador, Endereco endereco, Model model) {
+	public String updateMorador(@Valid @PathVariable("id") Long id, Morador morador, Endereco endereco, Model model) {
 		String cpf = morador.getCpf();
 		String nome = morador.getNome();
 		String telefone = morador.getTelefone();
-		moradorServ.atualizarDadosMorador(id, cpf, nome, telefone, endereco);
-		model.addAttribute("message", "Endereço atualizado com sucesso.<br>Bloco: " + endereco.getBloco() +"<br>Número: " + endereco.getNumero());
+		moradorServ.atualizarDadosMorador(id, nome,  telefone, cpf, endereco);
+		model.addAttribute("message", "Morador atualizado com sucesso.<br> nome: " + morador.getNome() +"<br>CPF: " + morador.getCpf());
 		return "success";
 	}
 }

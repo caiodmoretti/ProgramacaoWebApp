@@ -14,7 +14,8 @@
     <!-- Conteúdo da página -->
     <main>
         <div class="container">
-            <h1>Entre com as informações da encomenda</h1>
+            <h1><i class="fa fa-archive "style="margin-right: 8px;"> </i> Entre com as informações da encomenda</h1>
+            <hr>
             <form th:action="@{/encomenda/registrar}" th:object="${encomenda}" method="post">
 			<label for="funcionarioId"><h3>Selecione o Funcionário que recebeu a encomenda</h3></label>
 			<div class="dropdown">
@@ -39,7 +40,7 @@
 	        <input type="text" class="form-control" style="width: 350px; border-color: black" id="telefoneEntregador" name="telefoneEntregador"><br>
             <div style="padding-top: 10px;">
 	        <input  class="btn btn-primary" type="submit" value="Adicionar">
-                <a  href="#" class="btn btn-secondary">Voltar</a>
+                <a  th:href="@{/}" class="btn btn-secondary">Voltar</a>
             </form>
 
 			</div>

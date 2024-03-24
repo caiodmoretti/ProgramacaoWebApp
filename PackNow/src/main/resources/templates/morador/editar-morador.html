@@ -14,7 +14,8 @@
     <!-- Conteúdo da página -->
     <main>
 	 <div class="container">
-	    <h1>Faça a edição das informações do morador</h1>
+	    <h1> <i class="fa fa-user" aria-hidden="true"> </i> Faça a edição das informações do morador</h1>
+	    <hr>
 	    <h3>Morador</h3>
 	    <form th:action="@{/morador/update/{id}(id=${morador.id})}" th:object="${morador}" method="post">
 	        <label for="nome">Nome:</label>
@@ -37,7 +38,7 @@
 
 	    <br>	
 	        <input  class="btn btn-primary" type="submit" value="Atualizar">
-	       	<a  href="#" class="btn btn-secondary">Voltar</a>
+	       	<a  th:href="@{/morador/listar}"class="btn btn-secondary">Cancelar</a>
 	    </form>
 	    <br>
 	</div>

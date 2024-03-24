@@ -20,12 +20,13 @@
  <div class="container">
 	 	  <!-- Barra de pesquisa -->
 		<div  class="row">
-				<div class="col-md-4">
-				  	<h1><b>Lista de endereços</b></h1>
+				<div >
+				  	<h1> <i class="fa fa-building"></i> <b>Lista de endereços</b></h1>
 				</div>
   				<div class="col-md-4 offset-md-4">
 				</div>		
 		</div>
+				<hr>
     <table  id="enderecosTable" class="table table-striped">
 		<div  class="row">
 			<div class="col-md-4"></div>
@@ -52,7 +53,7 @@
           <td th:text="${endereco.numero}"></td>
           <td style="text-align: center;">
             <!-- Botões de editar e deletar -->
-            <a th:href="@{/endereco/edit/{id}(id=${endereco.id})}" class="btn btn-primary">Editar</a>
+            <a style="margin-right: 5px;" th:href="@{/endereco/edit/{id}(id=${endereco.id})}" class="btn btn-primary">Editar</a>
 			<a href="#" class="btn btn-danger deleteButton" th:href="@{/endereco/delete/{id}(id=${endereco.id})}">Deletar</a>
           </td>
       </tbody>

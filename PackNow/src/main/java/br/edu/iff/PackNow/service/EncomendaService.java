@@ -66,25 +66,22 @@ public class EncomendaService {
 		}
 	}
 	
-	public String atualizarEncomenda(Long id, Funcionario funcionarioEntrada, Endereco enderecoEntrega, Morador moradorRetirada, String dataEntrada, String dataSaida, String nomeEntregador, String telefoneEntregador ) {
+	public String atualizarEncomenda(Long id, Funcionario funcionarioEntrada, Endereco enderecoEntrega, String nomeEntregador, String telefoneEntregador,Funcionario funcionarioSaida, Morador moradorRetirada  ) {
 		Encomenda e = EncomendaRep.buscarPeloId(id);
 		if(e==null) {
 			return "Encomenda não encontrada.";
 		}else {
 			if(funcionarioEntrada!=null) {
-				e.setFuncionario(funcionarioEntrada);;
+				e.setFuncionario(funcionarioEntrada);
+			}
+			if(funcionarioSaida!=null) {
+				e.setFuncionarioSaida(funcionarioSaida);
 			}
 			if(moradorRetirada!=null) {
-				e.setMoradorRetirada(moradorRetirada);;
+				e.setMoradorRetirada(moradorRetirada);
 			}
 			if(enderecoEntrega!=null) {
 				e.setEndereco(enderecoEntrega);
-			}
-			if(dataEntrada!=null) {
-				e.setDataEntrada(dataEntrada);
-			}
-			if(dataSaida!=null) {
-				e.setDataEntrada(dataSaida);
 			}
 			if(nomeEntregador!=null) {
 				e.setNomeEntregador(nomeEntregador);
@@ -113,6 +110,13 @@ public class EncomendaService {
 			}
 		}
 		return "Dados inválidos para a retirada da encomenda.";
+	}
+
+	public String atualizarEncomenda(Long id, Funcionario funcionarioEntrada, Endereco enderecoEntrega,
+			Morador moradorRetirada, String dataEntrada, String dataSaida, String nomeEntregador,
+			String telefoneEntregador) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

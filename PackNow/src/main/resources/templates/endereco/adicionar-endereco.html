@@ -14,7 +14,8 @@
     <!-- Conteúdo da página -->
     <main>
         <div class="container">
-            <h2>Entre com as informações do endereço</h2>
+            <h1> <i class="fa fa-building"></i>  Entre com as informações do endereço</h1>
+            <hr>
             <form action="#" th:action="registrar" th:object="${endereco}" method="post" >
                 <div class="form-group">
                     <label for="bloco" >Bloco:</label>
@@ -26,7 +27,7 @@
                 </div>
 	            <div style="padding-top: 10px;">
 					<input class="btn btn-primary" type="submit" value="Adicionar">
-	                <a  href="#" class="btn btn-secondary">Voltar</a>
+	                <a  th:href="@{/}" class="btn btn-secondary">Voltar</a>
 				</div>
             </form>
             <br>

@@ -4,6 +4,7 @@
 <head>
     <title>Adicionar morador</title>
     <div th:replace="~{head :: frag_head}"></div>
+    
 </head>
 
 <body>
@@ -14,13 +15,14 @@
     <!-- Conteúdo da página -->
     <main>
 	 <div class="container">
-	    <h1>Entre com as informações do morador</h1>
+	    <h1> <i class="fa fa-user" aria-hidden="true"> </i> Entre com as informações do morador</h1>
+	    <hr>
 	    <h3>Morador</h3>
 	    <form th:action="@{/morador/registrar}" th:object="${morador}" method="post">
 	        <label for="nome">Nome:</label>
-	        <input type="text" class="form-control" style="width: 350px; border-color: black" id="nome" name="nome"><br>
+	        <input type="text" class="form-control" style="width: 350px; border-color: black" id="nome" name="nome" ><br>
 	        <label for="cpf">CPF:</label>
-	        <input type="text" class="form-control" style="width: 350px; border-color: black" id="cpf" name="cpf"><br>
+	        <input type="text" class="form-control" style="width: 350px; border-color: black" id="cpf" name="cpf" placeholder="Entre com os 11 dígitos do CPF..." required ><br>
 	        <label for="telefone">Telefone:</label>
 	        <input type="text" class="form-control" style="width: 350px; border-color: black"  id="telefone" name="telefone"><br>
 	
@@ -37,7 +39,7 @@
 
 	    <br>	
 	        <input  class="btn btn-primary" type="submit" value="Adicionar">
-	       	<a  href="#" class="btn btn-secondary">Voltar</a>
+	       	<a th:href="@{/}" class="btn btn-secondary">Voltar</a>
 	    </form>
 	    <br>
 	</div>

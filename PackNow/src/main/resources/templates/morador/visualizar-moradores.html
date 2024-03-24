@@ -19,12 +19,13 @@
 <main>
  <div class="container">
 		<div  class="row">
-				<div class="col-md-4">
-				  	<h1><b>Lista de moradores</b></h1>
+				<div>
+				  	<h1> <i class="fa fa-user" aria-hidden="true"></i> <b>Lista de moradores</b></h1>
 				</div>
   				<div class="col-md-4 offset-md-4">
 				</div>		
 		</div>
+		<hr>
     <table id="moradoresTable" class="table table-striped">
 			<!-- Barra de pesquisa -->
 			<div  class="row">
@@ -57,7 +58,7 @@
 
           <td>
             <!-- Botões de editar e deletar -->
-            <a th:href="@{/morador/edit/{id}(id=${morador.id})}" class="btn btn-primary">Editar</button>
+            <a style="margin-right: 5px;" th:href="@{/morador/edit/{id}(id=${morador.id})}" class="btn btn-primary">Editar</button>
             <a href="#" class="btn btn-danger deleteButton" th:href="@{/morador/delete/{cpf}(cpf=${morador.cpf})}">Deletar</a>
           </td>
         </tr>

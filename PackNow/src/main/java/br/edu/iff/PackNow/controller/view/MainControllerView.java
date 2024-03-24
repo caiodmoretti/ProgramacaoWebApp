@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainControllerView {
 	@GetMapping("/")
 	public String cruds(){
-		return "layoutBase";
+		return "home";
 	}
 	@GetMapping("/pagina1")
 	public String teste(){

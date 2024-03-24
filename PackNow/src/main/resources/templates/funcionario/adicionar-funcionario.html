@@ -14,7 +14,8 @@
     <!-- Conteúdo da página -->
     <main>
         <div class="container">
-            <h2>Entre com as informações do funcionário</h2>
+            <h1> <i class="fa fa-id-badge" aria-hidden="true"></i> Entre com as informações do funcionário</h1>
+            <hr>
             <form action="#" th:action="@{/funcionario/registrar}" th:object="${funcionario}" method="post" >
                 <div class="form-group">
                     <label for="bloco" >Nome:</label>
@@ -34,7 +35,7 @@
                 </div>
 	            <div style="padding-top: 10px;">
 					<input class="btn btn-primary" type="submit" value="Adicionar">
-	                <a  href="#" class="btn btn-secondary">Voltar</a>
+	                <a  th:href="@{/}" class="btn btn-secondary">Voltar</a>
 				</div>
             </form>
             <br>

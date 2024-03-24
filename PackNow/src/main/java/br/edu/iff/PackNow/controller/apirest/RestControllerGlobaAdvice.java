@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 @RestControllerAdvice
 public class RestControllerGlobaAdvice {
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity errorException(Exception e, HttpServlet request) {
+	public ResponseEntity errorException(Exception e) {
 		Error erro = new Error();
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);

@@ -14,7 +14,8 @@
     <!-- Conteúdo da página -->
     <main>
         <div class="container">
-            <h2>Faça a edição das informações do endereço</h2>
+            <h1> <i class="fa fa-building"></i>  Faça a edição das informações do endereço</h1>
+            <hr>
             <form action="#" th:action="@{/endereco/update/{id}(id=${endereco.id})}" th:object="${endereco}" method="post">
                 <div class="form-group">
                     <label for="bloco">Bloco:</label>
@@ -26,7 +27,7 @@
                 </div>
                 <div style="padding-top: 10px;">
                     <input class="btn btn-primary" type="submit" value="Atualizar">
-                    <a href="#" class="btn btn-secondary">Cancelar</a>
+                    <a th:href="@{/endereco/listar}" class="btn btn-secondary">Cancelar</a>
                 </div>
             </form>
             <br>

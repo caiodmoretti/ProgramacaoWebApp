@@ -21,13 +21,14 @@
 	<main>
 	 <div class="container">
 			<div  class="row">
-					<div class="col-md-4">
-					  	<h1><b>Lista de encomendas</b></h1>
+					<div >
+					  	<h1><i class="fa fa-archive "style="margin-right: 8px;"></i><b>Lista de encomendas</b></h1>
+
 					</div>
 	  				<div class="col-md-4 offset-md-4">
 					</div>		
 			</div>
-	    
+	    					  	<hr>
 	    <table id="encomendasTable" class="table table-striped">
 			<!-- Barra de pesquisa -->
 				<div  class="row">
@@ -45,6 +46,8 @@
 	          <th>Funcionário de entrada</th>
 	          <th>Endereço de entrega</th>
 	          <th>Data de entrada</th>
+	          <th>Nome do entregador</th>
+	          <th>Telefone do entregador</th>
 	          <th>Data de saída</th>
 	          <th>Morador que retirou</th>
 	          <th>Ações</th>
@@ -56,18 +59,21 @@
 	          <td th:text="${encomenda.id}"></td>
 	          <td th:text="${encomenda.funcionarioEntrada.nome}"></td>
 	          
-	          <td th:text="'Bloco '+${encomenda.enderecoEntrega.bloco} + ' Número ' + ${encomenda.enderecoEntrega.numero}"></td>
+	          <td th:text="'Bl '+${encomenda.enderecoEntrega.bloco} + ' Nº ' + ${encomenda.enderecoEntrega.numero}"></td>
 	          <td th:text="${encomenda.dataEntrada}"></td>
+	          <td th:text="${encomenda.nomeEntregador}"></td>
+	          <td th:text="${encomenda.telefoneEntregador}"></td>
 	          <td th:text="${encomenda.dataSaida}"></td>
 				<td th:text="${encomenda.moradorRetirada != null ? encomenda.moradorRetirada.nome : '-'}"></td>
 	
-	          <td>
+
+	          <td >
 	            <!-- Botões de editar e deletar -->
 	            
-				<a th:href="@{/encomenda/registrarSaidaForm/{id}(id=${encomenda.id})}" class="btn btn-success">Registra saída</a>
-	
-	            <button class="btn btn-primary">Editar</button>
-				<a href="#" class="btn btn-danger deleteButton" th:href="@{/encomenda/delete/{id}(id=${encomenda.id})}">Deletar</a>
+				<a  style="margin-right: 5px;" th:if="${encomenda.dataSaida == null}" th:href="@{/encomenda/registrarSaidaForm/{id}(id=${encomenda.id})}" class="btn btn-success">Registrar saída</a>
+
+				<a  style="margin-right: 5px;" href="#" class="btn btn-primary updateButton" th:href="@{/encomenda/edit/{id}(id=${encomenda.id})}">Atualizar</a>
+				<a style="margin-top: 5px;" href="#" class="btn btn-danger deleteButton" th:href="@{/encomenda/delete/{id}(id=${encomenda.id})}">Deletar</a>
 	          </td>
 	        </tr>
 	      </tbody>

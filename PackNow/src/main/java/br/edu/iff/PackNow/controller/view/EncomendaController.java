@@ -18,6 +18,7 @@ import br.edu.iff.PackNow.service.EncomendaService;
 import br.edu.iff.PackNow.service.EnderecoService;
 import br.edu.iff.PackNow.service.FuncionarioService;
 import br.edu.iff.PackNow.service.MoradorService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("encomenda")
@@ -45,7 +46,7 @@ public class EncomendaController {
 	        return "encomenda/adicionar-encomenda";
 	    }
 	   @PostMapping("/registrar")
-	   public String salvarEncomenda(@ModelAttribute("encomenda") Encomenda encomenda,@RequestParam("funcionarioId") Long funcionarioId, 
+	   public String salvarEncomenda(@Valid @ModelAttribute("encomenda") Encomenda encomenda,@RequestParam("funcionarioId") Long funcionarioId, 
 			   @RequestParam("enderecoId") Long enderecoId, @RequestParam("nomeEntregador") String nomeEntregador, 
 			   @RequestParam("telefoneEntregador") String telefoneEntregador , Model model ) {
 		   encomendaServ.addEncomenda(funcionarioId, enderecoId, nomeEntregador, telefoneEntregador);
@@ -80,4 +81,32 @@ public class EncomendaController {
 			}
 
 		}
+		@GetMapping("/edit/{id}")
+		   public String showEncomendaUpdateForm(@PathVariable("id") Long id, Model model){
+		    Encomenda encomenda = encomendaServ.getEncomendaById(id);
+		    model.addAttribute("encomenda", encomenda);
+	        model.addAttribute("funcionarios", funcionarioServ.listarFuncionarios());
+	        model.addAttribute("moradores", moradorServ.listarMoradores());
+	        model.addAttribute("enderecos", enderecoServ.listarEnderecos());
+		   return "encomenda/editar-encomenda";
+	   }	
+		@PostMapping("/update/{id}")
+		public String updateEncomenda(@Valid @PathVariable("id") Long id,
+		                              @RequestParam("funcionarioId") Long funcionarioId, 
+		                              @RequestParam("enderecoId") Long enderecoId, 
+		                              @RequestParam("nomeEntregador") String nomeEntregador, 
+		                              @RequestParam("telefoneEntregador") String telefoneEntregador, 
+		                              @RequestParam("funcionarioSaidaId") Long funcionarioSaidaId,
+		                              @RequestParam("moradorId") Long moradorId,
+		                              Model model) {
+		    Funcionario funcionarioEntrada = funcionarioServ.getFuncionarioById(funcionarioId);
+		    Funcionario funcionarioSaida = funcionarioServ.getFuncionarioById(funcionarioSaidaId);
+		    Endereco endereco = enderecoServ.getEnderecoById(enderecoId);
+		    Morador moradorRetirada = moradorServ.getMoradorById(moradorId);
+		    encomendaServ.atualizarEncomenda(id, funcionarioEntrada, endereco, nomeEntregador,
+		            telefoneEntregador, funcionarioSaida, moradorRetirada);
+		    model.addAttribute("message", "Encomenda atualizada com sucesso.");
+		    return "success";
+		}
+
 }
