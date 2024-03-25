@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 
 @RestControllerAdvice
 public class RestControllerGlobaAdvice {
-	@ExceptionHandler(Exception.class)
+
 	public ResponseEntity errorException(Exception e) {
 		Error erro = new Error();
 		
