@@ -14,7 +14,6 @@
 
 
 A proposta desse projeto é criar uma aplicação web para gerênciar a entrada e saída de encomendas em um condomínio.
-Este é um projeto elaborado para a disciplina de Desenvolvimento Web.
 
 ## Instalação / Como começar
 
